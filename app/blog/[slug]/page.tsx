@@ -39,7 +39,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     image: `https://howautomate.com${post.image}`,
     datePublished: post.date,
     dateModified: post.date,
-    author: { "@type": "Organization", name: "HowAutomate", url: "https://howautomate.com" },
+    author: { "@type": "Person", name: "Amit Singh", url: "https://howautomate.com/about", jobTitle: "Founder, HowAutomate" },
     publisher: { "@type": "Organization", name: "HowAutomate", logo: { "@type": "ImageObject", url: "https://howautomate.com/assets/logo-transparent.webp" } },
     url: `https://howautomate.com/blog/${slug}`,
     mainEntityOfPage: { "@type": "WebPage", "@id": `https://howautomate.com/blog/${slug}` },

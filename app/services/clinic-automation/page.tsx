@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Clinic Automation for Dental & Medical Practices | HowAutomate",
   description: "Automate appointment booking, patient follow-ups, and clinic operations. AI receptionist, CRM integration, and workflow automation for healthcare.",
   alternates: { canonical: "https://howautomate.com/services/clinic-automation" },
-  openGraph: { title: "Clinic Automation | HowAutomate", url: "https://howautomate.com/services/clinic-automation" },
+  openGraph: { type: "website", title: "Clinic Automation | HowAutomate", url: "https://howautomate.com/services/clinic-automation" },
 };
 
 export default function ClinicAutomationPage() {

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "CA Firm Automation — Compliance, Reporting & Workflow | HowAutomate",
   description: "Automate GST filing prep, client document collection, financial reporting, and workflow management for CA and accounting firms.",
   alternates: { canonical: "https://howautomate.com/services/ca-firm-automation" },
-  openGraph: { title: "CA Firm Automation | HowAutomate", url: "https://howautomate.com/services/ca-firm-automation" },
+  openGraph: { type: "website", title: "CA Firm Automation | HowAutomate", url: "https://howautomate.com/services/ca-firm-automation" },
 };
 
 export default function CAFirmAutomationPage() {

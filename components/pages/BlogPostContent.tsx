@@ -60,7 +60,7 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
             <Clock className="w-3 h-3" />{post.readTime}
           </span>
           <span className="text-xs text-muted-foreground">{post.date}</span>
-          <span className="text-xs text-muted-foreground">• By <strong className="text-foreground">HowAutomate Team</strong></span>
+          <span className="text-xs text-muted-foreground">• By <strong className="text-foreground">Amit Singh</strong></span>
         </motion.div>
 
         <motion.h1 initial="hidden" animate="visible" custom={2} variants={fadeUp} className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
@@ -106,7 +106,16 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
           })}
         </div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-14 rounded-2xl bg-accent/50 border border-border p-8 text-center">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-14 rounded-2xl border border-border p-6 flex gap-5 items-start">
+          <img src="/assets/amit-singh-howautomate.webp" alt="Amit Singh" width={64} height={64} loading="lazy" className="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-primary/20" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+          <div>
+            <p className="text-sm font-semibold text-foreground">Amit Singh</p>
+            <p className="text-xs text-muted-foreground mb-2">Founder, HowAutomate &mdash; Data Engineering, AI Automation &amp; Cloud Infrastructure</p>
+            <p className="text-sm text-foreground/70 leading-relaxed">Amit has 6+ years of experience building data pipelines, AI agents, and automation systems for businesses across India and globally. He founded HowAutomate to make enterprise-grade automation accessible to growing businesses.</p>
+          </div>
+        </motion.div>
+
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-8 rounded-2xl bg-accent/50 border border-border p-8 text-center">
           <h3 className="text-xl font-bold text-foreground mb-2">Get Weekly Automation Tips</h3>
           <p className="text-muted-foreground mb-4 text-sm">Real scripts, workflows, and AI tips — straight to your inbox.</p>
           <div className="flex justify-center">

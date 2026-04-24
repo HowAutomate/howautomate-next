@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description: "Learn about HowAutomate — a lean, expert team helping businesses automate workflows, build data pipelines, and deploy AI solutions.",
   alternates: { canonical: "https://howautomate.com/about" },
   openGraph: {
+    type: "website",
     title: "About HowAutomate",
     description: "Learn about HowAutomate — a lean, expert team helping businesses automate workflows, build data pipelines, and deploy AI solutions.",
     url: "https://howautomate.com/about",

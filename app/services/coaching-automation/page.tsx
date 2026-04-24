@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Coaching Institute Automation — Admissions & Operations | HowAutomate",
   description: "Automate student admissions, fee reminders, attendance tracking, and parent communication for coaching institutes and training centres.",
   alternates: { canonical: "https://howautomate.com/services/coaching-automation" },
-  openGraph: { title: "Coaching Institute Automation | HowAutomate", url: "https://howautomate.com/services/coaching-automation" },
+  openGraph: { type: "website", title: "Coaching Institute Automation | HowAutomate", url: "https://howautomate.com/services/coaching-automation" },
 };
 
 export default function CoachingAutomationPage() {
