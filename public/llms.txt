@@ -1,0 +1,9 @@
+# HowAutomate
+> B2B agency for Data engineering, AI implementation, and business automation.
+## Core Pages
+- [Services](https://howautomate.com/services): AI, data, and automation services
+- [Blog](https://howautomate.com/blog): Guides on ETL, AI agents, CRM automation, cloud
+## Key Articles
+- [What is ETL](https://howautomate.com/blog/what-is-etl)
+- [AI Receptionist Guide](https://howautomate.com/blog/ai-receptionist-guide)
+- [Azure vs AWS](https://howautomate.com/blog/azure-vs-aws)
