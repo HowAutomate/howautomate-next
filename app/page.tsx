@@ -35,6 +35,7 @@ const organizationSchema = {
   sameAs: [
     "https://www.linkedin.com/company/howautomate",
     "https://github.com/HowAutomate",
+    "https://www.wikidata.org/wiki/Q139551649",
   ],
 };
 
