@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   title: "HowAutomate — Data, AI & Automation for Modern Businesses",
   description: "We help businesses automate operations using AI, data pipelines, and smart workflows. Based in India, serving globally.",
   metadataBase: new URL("https://howautomate.com"),
+  alternates: { canonical: "https://howautomate.com" },
   openGraph: {
+    type: "website",
     siteName: "HowAutomate",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },

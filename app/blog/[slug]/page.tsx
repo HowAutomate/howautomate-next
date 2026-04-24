@@ -30,5 +30,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const post = posts[slug];
   if (!post) notFound();
-  return <BlogPostContent post={post} slug={slug} />;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: `https://howautomate.com${post.image}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Organization", name: "HowAutomate", url: "https://howautomate.com" },
+    publisher: { "@type": "Organization", name: "HowAutomate", logo: { "@type": "ImageObject", url: "https://howautomate.com/assets/logo-transparent.webp" } },
+    url: `https://howautomate.com/blog/${slug}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://howautomate.com/blog/${slug}` },
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <BlogPostContent post={post} slug={slug} />
+    </>
+  );
 }

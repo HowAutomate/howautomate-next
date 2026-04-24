@@ -1,7 +1,25 @@
+User-agent: *
+Allow: /
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 User-agent: Twitterbot
@@ -10,22 +28,13 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: GPTBot
+User-agent: CCBot
 Disallow: /
 
-User-agent: Google-Extended
+User-agent: cohere-ai
 Disallow: /
 
 User-agent: anthropic-ai
 Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: *
-Allow: /
 
 Sitemap: https://howautomate.com/sitemap.xml
