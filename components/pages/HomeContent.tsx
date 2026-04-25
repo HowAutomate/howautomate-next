@@ -149,7 +149,7 @@ function HeroSection() {
   }, [rawX, rawY])
 
   return (
-    <section className="items-start md:items-center" style={{ background: BG, ...GRID, position: 'relative', minHeight: '100svh', display: 'flex', overflow: 'hidden', paddingTop: 100, paddingBottom: 72 }}>
+    <section className="items-start md:items-center md:min-h-screen" style={{ background: BG, ...GRID, position: 'relative', display: 'flex', overflow: 'hidden', paddingTop: 100, paddingBottom: 72 }}>
 
       {orbDefs.map((orb, i) => <ParallaxOrb key={i} orb={orb} smoothX={smoothX} smoothY={smoothY} />)}
 
@@ -213,8 +213,8 @@ function HeroSection() {
         </motion.div>
       </div>
 
-      {/* scroll hint */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} style={{ position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)' }}>
+      {/* scroll hint — desktop only */}
+      <motion.div className="hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} style={{ position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)' }}>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           style={{ width: 22, height: 36, borderRadius: 11, border: '2px solid rgba(167,139,250,0.3)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 6 }}
         >
