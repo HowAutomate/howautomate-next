@@ -10,6 +10,13 @@ const fadeUp = {
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08 } }),
 };
 
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+}
+
 const categories = ["All", "Data", "AI", "Cloud", "Marketing"];
 
 const projects = [
@@ -77,7 +84,8 @@ export default function PortfolioContent() {
                 custom={i}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
+                onMouseMove={glowHandler}
+                className="glass-card glow-card rounded-2xl overflow-hidden transition-all duration-300"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img src={project.image} alt={project.title} width={400} height={192} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
