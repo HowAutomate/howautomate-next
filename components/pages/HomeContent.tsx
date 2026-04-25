@@ -87,10 +87,11 @@ const iconDefs = [
 
 /* ─── helpers ────────────────────────────────────────────── */
 
-function glowHandler(e: React.MouseEvent<HTMLDivElement>) {
-  const rect = e.currentTarget.getBoundingClientRect()
-  e.currentTarget.style.setProperty('--x', `${e.clientX - rect.left}px`)
-  e.currentTarget.style.setProperty('--y', `${e.clientY - rect.top}px`)
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
 }
 
 const CARD: React.CSSProperties = {
