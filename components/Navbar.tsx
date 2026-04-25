@@ -116,15 +116,14 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <a
-            href="https://calendly.com/hello-howautomate/30min"
-            target="_blank" rel="noopener noreferrer"
+          <Link
+            href="/contact"
             style={{ background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', padding: '9px 20px', borderRadius: 10, fontWeight: 700, fontSize: 14, textDecoration: 'none', display: 'inline-block', boxShadow: '0 4px 16px rgba(124,58,237,0.35)', transition: 'opacity 0.15s' }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
-            Book a Call
-          </a>
+            Send Enquiry
+          </Link>
         </div>
 
         {/* mobile toggle */}
@@ -156,13 +155,12 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <a
-              href="https://calendly.com/hello-howautomate/30min"
-              target="_blank" rel="noopener noreferrer"
+            <Link
+              href="/contact"
               style={{ display: 'block', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', padding: '11px 14px', borderRadius: 10, fontWeight: 700, fontSize: 14, textDecoration: 'none', marginTop: 8, textAlign: 'center' }}
             >
-              Book a Call
-            </a>
+              Send Enquiry
+            </Link>
           </nav>
         </div>
       )}

@@ -350,9 +350,9 @@ function SocialProofSection() {
             {clients.map((c, i) => (
               <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
                 whileHover={{ borderColor: 'rgba(255,255,255,0.14)' } as any}
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 110, height: 52, transition: 'border-color 0.2s' }}
+                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 12, padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 110, height: 52, transition: 'border-color 0.2s' }}
               >
-                <img src={c.src} alt={c.name} width={90} height={32} loading="lazy" style={{ maxHeight: 32, width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.5 }} />
+                <img src={c.src} alt={c.name} width={90} height={32} loading="lazy" style={{ maxHeight: 32, width: 'auto', objectFit: 'contain', filter: 'grayscale(1) brightness(1.6)', opacity: 0.75 }} />
               </motion.div>
             ))}
           </div>

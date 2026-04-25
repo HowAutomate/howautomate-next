@@ -107,7 +107,8 @@ export default function Footer() {
               </li>
             </ul>
             <div className="mt-5">
-              <p className="text-sm text-muted-foreground mb-2">Weekly automation tips:</p>
+              <p className="text-sm text-muted-foreground mb-1">Get 10 free automation resources</p>
+              <p className="text-xs text-muted-foreground/70 mb-2">Templates, scripts & AI prompts — straight to your inbox.</p>
               <NewsletterSignup variant="compact" />
             </div>
           </div>
