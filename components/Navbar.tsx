@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, FileText, Sparkle, Heart, Clock, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import logo from '@/assets/logo-transparent.png'
+import logo from '@/assets/logo-transparent.webp'
 
 const tools = [
   { icon: FileText, label: 'File to PDF Converter' },

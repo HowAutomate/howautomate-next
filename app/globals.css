@@ -71,7 +71,7 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; font-size: 90%; }
 }
 
 @layer utilities {

@@ -24,7 +24,7 @@ const GRID: React.CSSProperties = {
 
 const stats = [
   { value: '50+',  label: 'Projects Delivered'  },
-  { value: '5+',   label: 'Years Experience'     },
+  { value: '2023', label: 'Founded'               },
   { value: '3',    label: 'Countries Served'     },
   { value: '100%', label: 'Client Satisfaction'  },
 ]
