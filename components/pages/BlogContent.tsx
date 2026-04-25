@@ -15,11 +15,18 @@ const categories = ["All", "Data", "AI", "Cloud", "Automation", "Marketing"];
 
 const categoryStyle: Record<string, string> = {
   Data: "text-primary bg-accent border-primary/20",
-  AI: "text-secondary bg-orange-50 border-orange-200",
-  Cloud: "text-indigo-600 bg-indigo-50 border-indigo-200",
-  Automation: "text-amber-600 bg-amber-50 border-amber-200",
-  Marketing: "text-emerald-600 bg-emerald-50 border-emerald-200",
+  AI: "text-orange-400 bg-orange-950/40 border-orange-800/40",
+  Cloud: "text-indigo-400 bg-indigo-950/40 border-indigo-800/40",
+  Automation: "text-amber-400 bg-amber-950/40 border-amber-800/40",
+  Marketing: "text-emerald-400 bg-emerald-950/40 border-emerald-800/40",
 };
+
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+}
 
 export default function BlogContent() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -67,7 +74,8 @@ export default function BlogContent() {
                 custom={i}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-300 group cursor-pointer"
+                onMouseMove={glowHandler}
+                className="glass-card glow-card rounded-2xl overflow-hidden transition-all duration-300 group cursor-pointer"
                 onClick={() => window.location.href = `/blog/${post.slug}`}
               >
                 <div className="relative h-48 overflow-hidden">

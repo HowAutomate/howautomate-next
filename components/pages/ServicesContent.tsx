@@ -15,6 +15,13 @@ const fadeUp = {
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08 } }),
 };
 
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+}
+
 interface Outcome { icon: React.ElementType; label: string; value: string; }
 interface Service {
   icon: React.ElementType; name: string; desc: string; image: string;
@@ -145,8 +152,8 @@ function ServiceCard({ svc, pillar, index, onSelect }: { svc: Service; pillar: P
   return (
     <motion.div
       initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index} variants={fadeUp}
-      whileHover={{ y: -6 }} onClick={onSelect}
-      className="group glass-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl"
+      whileHover={{ y: -6 }} onClick={onSelect} onMouseMove={glowHandler}
+      className="group glass-card glow-card rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl"
     >
       <div className="relative h-44 overflow-hidden">
         <img src={svc.image} alt={svc.name} width={400} height={176} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -228,7 +235,7 @@ export default function ServicesContent() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {industryLinks.map((item, i) => (
               <motion.div key={item.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <Link href={item.to} className="group block rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-lg transition-all h-full">
+                <Link href={item.to} onMouseMove={glowHandler} className="group glow-card block rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-lg transition-all h-full">
                   <item.icon className="w-8 h-8 text-primary mb-4" />
                   <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{item.desc}</p>

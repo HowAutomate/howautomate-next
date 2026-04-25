@@ -9,6 +9,13 @@ const fadeUp = {
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08 } }),
 };
 
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+}
+
 const techStack = [
   { name: "Power BI", emoji: "📊" }, { name: "Azure", emoji: "☁️" }, { name: "AWS", emoji: "🟠" },
   { name: "Python", emoji: "🐍" }, { name: "SnapLogic", emoji: "⚙️" }, { name: "SQL", emoji: "🗄️" },
@@ -54,7 +61,7 @@ export default function AboutContent() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((v, i) => (
-              <motion.div key={v.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp} className="glass-card rounded-2xl p-8 text-center">
+              <motion.div key={v.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp} onMouseMove={glowHandler} className="glass-card glow-card rounded-2xl p-8 text-center">
                 <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-4"><v.icon className="w-7 h-7 text-primary" /></div>
                 <h3 className="text-xl font-bold mb-3 text-foreground">{v.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
@@ -72,7 +79,7 @@ export default function AboutContent() {
           </motion.div>
           <div className="flex flex-wrap justify-center gap-4">
             {techStack.map((tech, i) => (
-              <motion.div key={tech.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp} whileHover={{ scale: 1.05 }} className="glass-card rounded-xl px-5 py-3 flex items-center gap-2">
+              <motion.div key={tech.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp} whileHover={{ scale: 1.05 }} onMouseMove={glowHandler} className="glass-card glow-card rounded-xl px-5 py-3 flex items-center gap-2">
                 <span className="text-xl">{tech.emoji}</span>
                 <span className="text-sm font-medium text-foreground">{tech.name}</span>
               </motion.div>

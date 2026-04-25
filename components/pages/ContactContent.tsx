@@ -12,6 +12,13 @@ const fadeUp = {
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08 } }),
 };
 
+function glowHandler(e: React.MouseEvent) {
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
+  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+}
+
 const services = ["Data Analysis","ETL Pipeline","Power BI Dashboard","Google Sheets Automation","Report Automation","Web Crawlers","AI Receptionist","Marketing AI Agent","Workflow Automation","API Integration","Azure Solutions","AWS Architecture","SnapLogic Integration","Website / Web App","Amazon PPC Management","B2C SEO & Content","E-Commerce Marketing","Quick Commerce Marketing","Other / Not Sure"];
 
 const faqs = [
@@ -71,11 +78,11 @@ export default function ContactContent() {
               </motion.div>
               {[
                 { icon: Mail, label: "Email", value: "hello@howautomate.com", href: "mailto:hello@howautomate.com", color: "text-primary", bg: "bg-accent" },
-                { icon: MessageCircle, label: "WhatsApp", value: "Chat with us now", href: "https://wa.me/919602094213?text=Hi%2C%20I%27m%20interested%20in%20your%20services", color: "text-green-600", bg: "bg-green-50" },
-                { icon: Calendar, label: "Book a Call", value: "Schedule via Calendly", href: "https://calendly.com/hello-howautomate/30min", color: "text-secondary", bg: "bg-orange-50" },
-                { icon: Phone, label: "Phone", value: "+91 96020 94213", href: "tel:+919602094213", color: "text-neon-purple", bg: "bg-indigo-50" },
+                { icon: MessageCircle, label: "WhatsApp", value: "Chat with us now", href: "https://wa.me/919602094213?text=Hi%2C%20I%27m%20interested%20in%20your%20services", color: "text-green-400", bg: "bg-green-950/40" },
+                { icon: Calendar, label: "Book a Call", value: "Schedule via Calendly", href: "https://calendly.com/hello-howautomate/30min", color: "text-secondary", bg: "bg-orange-950/40" },
+                { icon: Phone, label: "Phone", value: "+91 96020 94213", href: "tel:+919602094213", color: "text-neon-purple", bg: "bg-indigo-950/40" },
               ].map((item, i) => (
-                <motion.a key={item.label} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i + 1} variants={fadeUp} className="flex items-center gap-4 p-5 glass-card rounded-xl hover:border-primary/30 transition-all duration-300 group">
+                <motion.a key={item.label} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i + 1} variants={fadeUp} onMouseMove={glowHandler} className="flex items-center gap-4 p-5 glass-card glow-card rounded-xl hover:border-primary/30 transition-all duration-300 group">
                   <div className={`w-11 h-11 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0`}>
                     <item.icon className={`w-5 h-5 ${item.color}`} />
                   </div>
@@ -87,8 +94,8 @@ export default function ContactContent() {
               ))}
             </div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-3">
-              <div className="glass-card rounded-2xl p-8">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} onMouseMove={glowHandler} className="lg:col-span-3 glass-card glow-card rounded-2xl">
+              <div className="p-8">
                 {submitted ? (
                   <div className="text-center py-12">
                     <div className="text-6xl mb-4">🎉</div>

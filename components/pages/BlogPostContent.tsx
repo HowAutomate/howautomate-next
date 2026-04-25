@@ -13,10 +13,10 @@ const fadeUp = {
 
 const categoryStyle: Record<string, string> = {
   Data: "text-primary bg-accent border-primary/20",
-  AI: "text-secondary bg-orange-50 border-orange-200",
-  Cloud: "text-indigo-600 bg-indigo-50 border-indigo-200",
-  Automation: "text-amber-600 bg-amber-50 border-amber-200",
-  Marketing: "text-emerald-600 bg-emerald-50 border-emerald-200",
+  AI: "text-orange-400 bg-orange-950/40 border-orange-800/40",
+  Cloud: "text-indigo-400 bg-indigo-950/40 border-indigo-800/40",
+  Automation: "text-amber-400 bg-amber-950/40 border-amber-800/40",
+  Marketing: "text-emerald-400 bg-emerald-950/40 border-emerald-800/40",
 };
 
 function renderInline(text: string, keyPrefix: string) {
@@ -143,7 +143,7 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
               {otherSlugs.map((s) => {
                 const related = posts[s];
                 return (
-                  <Link key={s} href={`/blog/${s}`} className="group glass-card rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
+                  <Link key={s} href={`/blog/${s}`} className="group glass-card glow-card rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300" onMouseMove={(e) => { const el = e.currentTarget as HTMLElement; const r = el.getBoundingClientRect(); el.style.setProperty('--x', `${e.clientX - r.left}px`); el.style.setProperty('--y', `${e.clientY - r.top}px`) }}>
                     <img src={related.image} alt={related.title} width={400} height={128} loading="lazy" className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="p-4">
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${categoryStyle[related.category]}`}>{related.category}</span>
