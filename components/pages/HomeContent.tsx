@@ -149,7 +149,7 @@ function HeroSection() {
   }, [rawX, rawY])
 
   return (
-    <section style={{ background: BG, ...GRID, position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: 72 }}>
+    <section className="items-start md:items-center" style={{ background: BG, ...GRID, position: 'relative', minHeight: '100svh', display: 'flex', overflow: 'hidden', paddingTop: 100, paddingBottom: 72 }}>
 
       {orbDefs.map((orb, i) => <ParallaxOrb key={i} orb={orb} smoothX={smoothX} smoothY={smoothY} />)}
 
