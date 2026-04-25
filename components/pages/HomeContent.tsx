@@ -347,13 +347,14 @@ function SocialProofSection() {
         </div>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', marginBottom: 24 }}>Trusted By</div>
-          <div className="flex flex-wrap justify-center gap-5 items-center">
+          <div className="flex flex-wrap justify-center gap-4 items-stretch">
             {clients.map((c, i) => (
               <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-                whileHover={{ borderColor: 'rgba(255,255,255,0.14)' } as any}
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 12, padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 110, height: 52, transition: 'border-color 0.2s' }}
+                whileHover={{ borderColor: 'rgba(255,255,255,0.18)', background: 'rgba(255,255,255,0.09)' } as any}
+                style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: '16px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, minWidth: 130, transition: 'all 0.2s' }}
               >
-                <img src={c.src} alt={c.name} width={90} height={32} loading="lazy" style={{ maxHeight: 32, width: 'auto', objectFit: 'contain', filter: 'grayscale(1) brightness(1.6)', opacity: 0.75 }} />
+                <img src={c.src} alt={c.name} width={100} height={48} loading="lazy" style={{ maxHeight: 48, maxWidth: 100, width: 'auto', objectFit: 'contain', display: 'block' }} />
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{c.name}</span>
               </motion.div>
             ))}
           </div>
