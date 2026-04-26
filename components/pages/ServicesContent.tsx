@@ -168,6 +168,12 @@ function ServiceCard({ svc, pillar, index, onSelect }: { svc: Service; pillar: P
         <div className={`flex items-center gap-1.5 text-xs font-semibold ${pillar.iconColor} group-hover:gap-2.5 transition-all`}>
           Learn more <ArrowRight className="w-3.5 h-3.5" />
         </div>
+        {/* Full service content — in DOM for search engine indexing, hidden visually */}
+        <div className="sr-only">
+          <p>{svc.longDesc}</p>
+          <ul>{svc.benefits.map(b => <li key={b}>{b}</li>)}</ul>
+          <ul>{svc.useCases.map(uc => <li key={uc}>{uc}</li>)}</ul>
+        </div>
       </div>
     </motion.div>
   );
