@@ -89,9 +89,12 @@ const iconDefs = [
 
 function glowHandler(e: React.MouseEvent) {
   const el = e.currentTarget as HTMLElement
-  const rect = el.getBoundingClientRect()
-  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
-  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+  const x = e.clientX, y = e.clientY
+  requestAnimationFrame(() => {
+    const rect = el.getBoundingClientRect()
+    el.style.setProperty('--x', `${x - rect.left}px`)
+    el.style.setProperty('--y', `${y - rect.top}px`)
+  })
 }
 
 const CARD: React.CSSProperties = {
@@ -140,12 +143,16 @@ function HeroSection() {
   const smoothY = useSpring(rawY, { stiffness: 55, damping: 20 })
 
   useEffect(() => {
+    let rafId: number
     const onMove = (e: MouseEvent) => {
-      rawX.set(e.clientX - window.innerWidth / 2)
-      rawY.set(e.clientY - window.innerHeight / 2)
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        rawX.set(e.clientX - window.innerWidth / 2)
+        rawY.set(e.clientY - window.innerHeight / 2)
+      })
     }
     window.addEventListener('mousemove', onMove)
-    return () => window.removeEventListener('mousemove', onMove)
+    return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(rafId) }
   }, [rawX, rawY])
 
   return (
