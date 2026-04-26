@@ -14,6 +14,11 @@ export default function EcommerceAutomationPage() {
       industry="E-Commerce Brands"
       headline="Scale Your E-Commerce Brand with Data-Driven Automation"
       subheadline="From inventory sync to ad optimisation to customer retention — we automate the operations that eat your margins."
+      description="Indian D2C and e-commerce brands are operating in an increasingly competitive environment. Selling on Amazon, Flipkart, Meesho, and your own website simultaneously creates operational complexity that manual processes simply cannot keep up with. Inventory errors, delayed order processing, and poor ad performance directly erode margins that are already under pressure.
+
+HowAutomate works with e-commerce brands at every stage — from ₹10L/month GMV to ₹10Cr+ — to build automation that protects margins and enables scale. We sync inventory across all channels in real time, automate PPC campaign management to maximise ROAS, and build fulfilment workflows that cut order processing time dramatically.
+
+Our data pipelines bring together sales, inventory, advertising, and customer data into unified dashboards, so founders and operations teams can make decisions based on real information. If you've hit a growth ceiling because your operations can't scale with your marketing, automation is the lever that breaks through."
       painPoints={[
         { icon: "ShoppingCart", title: "Inventory Sync Issues", desc: "Selling across Amazon, Flipkart, and your website means constant stock mismatches and overselling." },
         { icon: "TrendingUp", title: "Ad Spend Without Clarity", desc: "Running PPC campaigns but no clear view of ROAS, ACoS, or which SKUs are profitable." },
@@ -29,6 +34,13 @@ export default function EcommerceAutomationPage() {
         { metric: "3.2×", label: "Sales growth via PPC" },
         { metric: "-60%", label: "Order processing time" },
         { metric: "+28%", label: "Customer repeat rate" },
+      ]}
+      faqs={[
+        { q: "Which marketplaces do you support for inventory sync?", a: "We support Amazon India, Flipkart, Meesho, Myntra, Nykaa, and your own Shopify or WooCommerce store. Custom marketplace integrations are available on request." },
+        { q: "How does PPC automation work?", a: "We build rules-based and AI-driven bidding logic for Amazon Sponsored Products/Brands and Google Shopping. Bids adjust automatically based on ACOS targets, conversion data, and inventory levels — so your budget always works hardest." },
+        { q: "Can you automate post-purchase customer flows?", a: "Yes. We build post-purchase email and WhatsApp sequences for review requests, feedback collection, loyalty rewards, and win-back campaigns — fully automated based on order status and customer history." },
+        { q: "Do you work with Shopify specifically?", a: "Yes. We have deep experience with Shopify automation including order management, inventory sync, discount automation, and integration with Indian payment gateways and logistics providers like Shiprocket and Delhivery." },
+        { q: "What size brand do you work with?", a: "We work with brands doing ₹5L/month GMV and above. The automation approach and pricing scale with your needs — whether you're a single-SKU D2C brand or a multi-category marketplace seller." },
       ]}
     />
   );

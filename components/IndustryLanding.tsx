@@ -14,17 +14,21 @@ const fadeUp = {
 interface PainPoint { icon: string; title: string; desc: string; }
 interface Solution { title: string; desc: string; }
 
+interface FAQ { q: string; a: string; }
+
 interface IndustryLandingProps {
   industry: string;
   headline: string;
   subheadline: string;
+  description: string;
   painPoints: PainPoint[];
   solutions: Solution[];
   outcomes: { metric: string; label: string }[];
+  faqs: FAQ[];
   ctaText?: string;
 }
 
-export default function IndustryLanding({ industry, headline, subheadline, painPoints, solutions, outcomes, ctaText = "Book a Free Discovery Call" }: IndustryLandingProps) {
+export default function IndustryLanding({ industry, headline, subheadline, description, painPoints, solutions, outcomes, faqs, ctaText = "Book a Free Discovery Call" }: IndustryLandingProps) {
   return (
     <main className="min-h-screen pt-24">
       <section className="py-20 px-4 bg-grid">
@@ -33,8 +37,9 @@ export default function IndustryLanding({ industry, headline, subheadline, painP
             <Zap className="w-3.5 h-3.5" /> Built for {industry}
           </motion.span>
           <motion.h1 initial="hidden" animate="visible" variants={fadeUp} custom={1} className="text-4xl md:text-6xl font-bold mb-6 text-foreground leading-tight">{headline}</motion.h1>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={2} className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">{subheadline}</motion.p>
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={2} className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">{subheadline}</motion.p>
+          <motion.p initial="hidden" animate="visible" variants={fadeUp} custom={3} className="text-base text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">{description}</motion.p>
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={4} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-neon text-white shadow-lg shadow-primary/20 hover:opacity-90 rounded-xl px-8">
               <a href="https://calendly.com/hello-howautomate/30min" target="_blank" rel="noopener noreferrer">{ctaText}</a>
             </Button>
@@ -97,6 +102,26 @@ export default function IndustryLanding({ industry, headline, subheadline, painP
                 <div className="text-4xl font-bold gradient-text mb-2">{o.metric}</div>
                 <p className="text-sm text-muted-foreground">{o.label}</p>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-card border-y border-border">
+        <div className="container mx-auto max-w-3xl">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 text-foreground">Frequently Asked Questions</h2>
+          </motion.div>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.details key={faq.q} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp} className="glass-card rounded-xl p-6 group">
+                <summary className="font-semibold text-foreground cursor-pointer list-none flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span className="text-primary text-xl leading-none flex-shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+                </summary>
+                <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{faq.a}</p>
+              </motion.details>
             ))}
           </div>
         </div>

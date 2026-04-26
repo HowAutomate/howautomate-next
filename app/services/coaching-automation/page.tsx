@@ -14,6 +14,11 @@ export default function CoachingAutomationPage() {
       industry="Coaching Institutes"
       headline="Automate Admissions, Student Communication, and Institute Operations"
       subheadline="From enquiry to enrolment to results tracking — streamline your coaching institute with smart automation."
+      description="Coaching institutes face a unique operational challenge: managing hundreds or thousands of students across batches, subjects, and schedules — while keeping parents informed and fees collected on time. Manual processes don't scale, and the administrative overhead grows faster than enrolments.
+
+HowAutomate builds end-to-end automation for coaching institutes and training centres — from the moment a student enquires to results day and beyond. Enquiries from websites, social media, walk-ins, and calls are captured centrally. Automated drip sequences follow up until enrolment. After admission, fee reminders, attendance alerts, and exam communications run on autopilot.
+
+Our systems are designed for the Indian education market — supporting Hindi and English communications, integrating with local payment gateways like Razorpay, and working with the tools your admin team already uses. Whether you run a JEE/NEET coaching centre, a CA coaching institute, or a skill development training business, we have experience specific to your context."
       painPoints={[
         { icon: "Users", title: "Manual Admission Process", desc: "Enquiries come from calls, walk-ins, and social media — but follow-up is inconsistent and slow." },
         { icon: "FileText", title: "Fee Collection Chaos", desc: "Tracking payments, sending reminders, and managing defaulters is a full-time job." },
@@ -29,6 +34,13 @@ export default function CoachingAutomationPage() {
         { metric: "+50%", label: "Enquiry-to-enrolment rate" },
         { metric: "10 hrs/wk", label: "Admin time saved" },
         { metric: "95%", label: "Fee collection on time" },
+      ]}
+      faqs={[
+        { q: "Can you automate WhatsApp communication with parents?", a: "Yes. We build WhatsApp automation for parent updates, fee reminders, exam schedules, and result announcements — all triggered automatically based on events in your system." },
+        { q: "Do you integrate with Razorpay or other payment gateways?", a: "Yes. We integrate with Razorpay, PayU, and other payment gateways to track fee payments and trigger automated reminders for pending dues — with payment links sent directly via WhatsApp." },
+        { q: "How does enquiry management work?", a: "Enquiries from all channels — website forms, Facebook/Instagram ads, walk-ins — are captured in a central CRM. Automated follow-up sequences run via WhatsApp and email until the student converts or opts out." },
+        { q: "Can you track student attendance automatically?", a: "Yes. With RFID, biometric, or QR-based attendance systems, attendance is tracked digitally and parent notifications are sent automatically for absences." },
+        { q: "What is the typical ROI for coaching institutes?", a: "Clients typically see a 40–60% reduction in admin time, 20–30% improvement in fee collection rates, and significant uplift in enquiry-to-enrolment conversion within 90 days of going live." },
       ]}
     />
   );

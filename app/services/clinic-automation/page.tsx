@@ -14,6 +14,11 @@ export default function ClinicAutomationPage() {
       industry="Dental & Medical Clinics"
       headline="Stop Losing Patients to Missed Calls and Manual Workflows"
       subheadline="We automate appointment booking, patient follow-ups, and clinic operations — so your staff focuses on care, not paperwork."
+      description="Running a dental or medical clinic today means managing not just clinical care but an entire operational machine — appointment scheduling, patient communication, insurance processing, staff coordination, and compliance. When any part of this breaks down, patient satisfaction suffers and revenue leaks.
+
+HowAutomate specialises in clinic automation for dental practices, GP clinics, and multi-speciality centres. Our AI receptionist answers every call, books appointments, and routes complex queries to staff — running 24 hours a day without vacation or sick leave. Patient reminder workflows cut no-shows automatically, without adding workload to your front desk team.
+
+We integrate with common clinic management systems including Practo, Medinous, and custom setups. Whether you're a single-location clinic or a growing chain, our automation scales with you — giving you real-time visibility into every location's appointment flow, revenue, and patient satisfaction from a single dashboard."
       painPoints={[
         { icon: "Phone", title: "Missed Calls = Lost Patients", desc: "Every missed call is a patient booking elsewhere. Your front desk can't answer every call during peak hours." },
         { icon: "Clock", title: "Hours Wasted on Admin", desc: "Staff spend hours on appointment reminders, follow-ups, and data entry instead of patient care." },
@@ -29,6 +34,13 @@ export default function ClinicAutomationPage() {
         { metric: "80%", label: "Calls handled by AI" },
         { metric: "-40%", label: "Reduction in no-shows" },
         { metric: "15 hrs/wk", label: "Admin time saved" },
+      ]}
+      faqs={[
+        { q: "Does the AI receptionist sound natural?", a: "Yes. We use advanced voice AI that handles conversational booking, understands appointment types, and escalates complex queries to your staff seamlessly — patients often cannot tell the difference." },
+        { q: "Which clinic management software do you integrate with?", a: "We work with Practo, Medinous, ClinicPRO, and can integrate with any system that has an API or data export. Custom setups are also supported." },
+        { q: "What happens if the AI cannot handle a patient query?", a: "The AI automatically escalates to a human staff member via call transfer or WhatsApp notification, so no patient is left without a response." },
+        { q: "How are patient reminders sent?", a: "Via SMS, WhatsApp, and email — depending on patient preferences. Reminders go out at configurable intervals, for example 48 hours and 2 hours before the appointment." },
+        { q: "Is patient data handled securely?", a: "All patient data is encrypted at rest and in transit. We follow healthcare data security best practices and work within your existing compliance requirements." },
       ]}
     />
   );
