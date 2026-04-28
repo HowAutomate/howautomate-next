@@ -34,6 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`dark ${inter.variable}`} suppressHydrationWarning>
       <head>
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>

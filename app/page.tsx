@@ -19,7 +19,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "HowAutomate",
   url: "https://howautomate.com",
-  logo: "https://howautomate.com/assets/logo-transparent.webp",
+  logo: { "@type": "ImageObject", url: "https://howautomate.com/favicon.png", width: 512, height: 512 },
   description: "B2B agency specializing in data engineering, AI automation, cloud infrastructure, and digital marketing for modern businesses.",
   email: "hello@howautomate.com",
   telephone: "+91-96020-94213",
