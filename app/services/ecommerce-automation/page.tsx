@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "E-Commerce Automation — Inventory, Ads & Operations | HowAutomate",
   description: "Automate inventory management, PPC campaigns, order processing, and customer retention for D2C and e-commerce brands.",
   alternates: { canonical: "https://howautomate.com/services/ecommerce-automation" },
-  openGraph: { type: "website", title: "E-Commerce Automation | HowAutomate", url: "https://howautomate.com/services/ecommerce-automation" },
+  openGraph: { type: "website", title: "E-Commerce Automation | HowAutomate", url: "https://howautomate.com/services/ecommerce-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
 export default function EcommerceAutomationPage() {

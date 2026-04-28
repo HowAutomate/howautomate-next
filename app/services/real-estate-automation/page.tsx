@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Real Estate Automation — CRM, Leads & Workflow | HowAutomate",
   description: "Automate lead follow-up, property listings, CRM updates, and client communication for real estate agencies. Save 20+ hours a week.",
   alternates: { canonical: "https://howautomate.com/services/real-estate-automation" },
-  openGraph: { type: "website", title: "Real Estate Automation | HowAutomate", url: "https://howautomate.com/services/real-estate-automation" },
+  openGraph: { type: "website", title: "Real Estate Automation | HowAutomate", url: "https://howautomate.com/services/real-estate-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
 export default function RealEstateAutomationPage() {

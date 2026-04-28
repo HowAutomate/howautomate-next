@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: "Contact Us | HowAutomate",
     description: "Get in touch with HowAutomate. Book a free call, send an inquiry, or reach us via WhatsApp.",
     url: "https://howautomate.com/contact",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
 };
 

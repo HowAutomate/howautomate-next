@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: "Blog & Insights | HowAutomate",
     description: "Practical guides on ETL, AI agents, Power BI, cloud migration, CRM automation, and digital marketing from the HowAutomate team.",
     url: "https://howautomate.com/blog",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
 };
 

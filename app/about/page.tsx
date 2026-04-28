@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: "About HowAutomate",
     description: "Learn about HowAutomate — a lean, expert team helping businesses automate workflows, build data pipelines, and deploy AI solutions.",
     url: "https://howautomate.com/about",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
 };
 

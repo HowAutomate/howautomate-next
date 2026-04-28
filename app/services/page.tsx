@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     title: "Services — Data, AI, Cloud & Marketing | HowAutomate",
     description: "Explore HowAutomate's services: data analytics, ETL pipelines, AI agents, cloud engineering, and digital marketing for modern businesses.",
     url: "https://howautomate.com/services",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
 };
 
