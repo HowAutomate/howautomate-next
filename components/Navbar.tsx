@@ -67,7 +67,7 @@ export default function Navbar() {
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
         >
-          <img src={logo.src} alt="HowAutomate" fetchPriority="high" style={{ height: 60, width: 'auto', display: 'block' }} />
+          <img src={logo.src} alt="HowAutomate" fetchPriority="high" width={logo.width} height={logo.height} style={{ height: 60, width: 'auto', display: 'block' }} />
         </Link>
 
         {/* desktop nav */}

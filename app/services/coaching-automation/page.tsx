@@ -8,9 +8,47 @@ export const metadata: Metadata = {
   openGraph: { type: "website", title: "Coaching Institute Automation | HowAutomate", url: "https://howautomate.com/services/coaching-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://howautomate.com/services/coaching-automation#service",
+  name: "Coaching Institute Automation — Admissions & Operations",
+  description: "Automate student admissions, fee reminders, attendance tracking, and parent communication for coaching institutes and training centres.",
+  url: "https://howautomate.com/services/coaching-automation",
+  serviceType: "Business Process Automation",
+  provider: { "@type": "Organization", "@id": "https://howautomate.com/#organization", name: "HowAutomate", url: "https://howautomate.com" },
+  areaServed: { "@type": "Country", name: "India" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "Can you automate WhatsApp communication with parents?", acceptedAnswer: { "@type": "Answer", text: "Yes. We build WhatsApp automation for parent updates, fee reminders, exam schedules, and result announcements — all triggered automatically based on events in your system." } },
+    { "@type": "Question", name: "Do you integrate with Razorpay or other payment gateways?", acceptedAnswer: { "@type": "Answer", text: "Yes. We integrate with Razorpay, PayU, and other payment gateways to track fee payments and trigger automated reminders for pending dues — with payment links sent directly via WhatsApp." } },
+    { "@type": "Question", name: "How does enquiry management work?", acceptedAnswer: { "@type": "Answer", text: "Enquiries from all channels — website forms, Facebook/Instagram ads, walk-ins — are captured in a central CRM. Automated follow-up sequences run via WhatsApp and email until the student converts or opts out." } },
+    { "@type": "Question", name: "Can you track student attendance automatically?", acceptedAnswer: { "@type": "Answer", text: "Yes. With RFID, biometric, or QR-based attendance systems, attendance is tracked digitally and parent notifications are sent automatically for absences." } },
+    { "@type": "Question", name: "What is the typical ROI for coaching institutes?", acceptedAnswer: { "@type": "Answer", text: "Clients typically see a 40–60% reduction in admin time, 20–30% improvement in fee collection rates, and significant uplift in enquiry-to-enrolment conversion within 90 days of going live." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://howautomate.com/services" },
+    { "@type": "ListItem", position: 3, name: "Coaching Institute Automation", item: "https://howautomate.com/services/coaching-automation" },
+  ],
+};
+
 export default function CoachingAutomationPage() {
   return (
-    <IndustryLanding
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <IndustryLanding
       industry="Coaching Institutes"
       headline="Automate Admissions, Student Communication, and Institute Operations"
       subheadline="From enquiry to enrolment to results tracking — streamline your coaching institute with smart automation."
@@ -43,5 +81,6 @@ Our systems are designed for the Indian education market — supporting Hindi an
         { q: "What is the typical ROI for coaching institutes?", a: "Clients typically see a 40–60% reduction in admin time, 20–30% improvement in fee collection rates, and significant uplift in enquiry-to-enrolment conversion within 90 days of going live." },
       ]}
     />
+    </>
   );
 }

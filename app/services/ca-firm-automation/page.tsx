@@ -8,9 +8,47 @@ export const metadata: Metadata = {
   openGraph: { type: "website", title: "CA Firm Automation | HowAutomate", url: "https://howautomate.com/services/ca-firm-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://howautomate.com/services/ca-firm-automation#service",
+  name: "CA Firm Automation — Compliance, Reporting & Workflow",
+  description: "Automate GST filing prep, client document collection, financial reporting, and workflow management for CA and accounting firms in India.",
+  url: "https://howautomate.com/services/ca-firm-automation",
+  serviceType: "Business Process Automation",
+  provider: { "@type": "Organization", "@id": "https://howautomate.com/#organization", name: "HowAutomate", url: "https://howautomate.com" },
+  areaServed: { "@type": "Country", name: "India" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "What accounting software does this integrate with?", acceptedAnswer: { "@type": "Answer", text: "We work with Tally Prime, Zoho Books, QuickBooks, and custom ERP setups. If your software has an API or exports data, we can automate around it." } },
+    { "@type": "Question", name: "Can you automate GST return preparation specifically?", acceptedAnswer: { "@type": "Answer", text: "Yes. We build pipelines that extract purchase and sales data, match GSTR-2A with books, flag mismatches, and prepare reconciled data ready for filing — dramatically reducing manual reconciliation time." } },
+    { "@type": "Question", name: "How do clients submit documents securely?", acceptedAnswer: { "@type": "Answer", text: "We set up a branded, secure client portal with structured upload categories. Clients get auto-reminders and can submit from mobile or desktop. All files are stored and categorised automatically." } },
+    { "@type": "Question", name: "Will this work for a small CA firm (2–5 staff)?", acceptedAnswer: { "@type": "Answer", text: "Absolutely. Many of our CA firm clients are 2–5 person teams. Automation has the biggest impact when every team member's time matters — and our pricing is designed for smaller practices." } },
+    { "@type": "Question", name: "How long does implementation take?", acceptedAnswer: { "@type": "Answer", text: "Typically 3–6 weeks depending on scope. Document collection and reminder automation can be live in as little as 2 weeks." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://howautomate.com/services" },
+    { "@type": "ListItem", position: 3, name: "CA Firm Automation", item: "https://howautomate.com/services/ca-firm-automation" },
+  ],
+};
+
 export default function CAFirmAutomationPage() {
   return (
-    <IndustryLanding
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <IndustryLanding
       industry="CA & Accounting Firms"
       headline="Automate Compliance, Client Communication, and Financial Reporting"
       subheadline="We help CA firms eliminate repetitive data work so you focus on advisory — not data entry."
@@ -43,5 +81,6 @@ Our systems are built to handle Indian accounting workflows — GST reconciliati
         { q: "How long does implementation take?", a: "Typically 3–6 weeks depending on scope. Document collection and reminder automation can be live in as little as 2 weeks." },
       ]}
     />
+    </>
   );
 }

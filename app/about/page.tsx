@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
 import AboutContent from "@/components/pages/AboutContent";
 
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "https://howautomate.com/about#page",
+  name: "About HowAutomate",
+  url: "https://howautomate.com/about",
+  description: "Meet Amit Singh and the HowAutomate team — specialists in data engineering, AI automation, and workflow automation.",
+  about: { "@type": "Organization", "@id": "https://howautomate.com/#organization" },
+};
+
 export const metadata: Metadata = {
-  title: "About HowAutomate | Data, AI & Automation Agency",
-  description: "Learn about HowAutomate — a lean, expert team helping businesses automate workflows, build data pipelines, and deploy AI solutions.",
+  title: "About HowAutomate — AI & Automation Experts | Amit Singh",
+  description: "Meet Amit Singh and the HowAutomate team — specialists in data engineering, AI automation, and workflow automation for Indian SMBs and global clients.",
   alternates: { canonical: "https://howautomate.com/about" },
   openGraph: {
     type: "website",
@@ -15,5 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutContent />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <AboutContent />
+    </>
+  );
 }

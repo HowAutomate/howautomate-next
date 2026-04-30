@@ -17,13 +17,14 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://howautomate.com/#organization",
   name: "HowAutomate",
   url: "https://howautomate.com",
   logo: { "@type": "ImageObject", url: "https://howautomate.com/favicon.png", width: 512, height: 512 },
   description: "B2B agency specializing in data engineering, AI automation, cloud infrastructure, and digital marketing for modern businesses.",
   email: "hello@howautomate.com",
   telephone: "+91-96020-94213",
-  foundingDate: "2023",
+  foundingDate: "2023-01-01",
   areaServed: "Worldwide",
   address: { "@type": "PostalAddress", addressCountry: "IN" },
   contactPoint: {
@@ -34,6 +35,8 @@ const organizationSchema = {
   },
   sameAs: [
     "https://www.linkedin.com/company/howautomate",
+    "https://www.instagram.com/howautomate",
+    "https://www.youtube.com/@HowAutomate",
     "https://github.com/HowAutomate",
     "https://www.wikidata.org/wiki/Q139551649",
   ],
@@ -42,6 +45,7 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://howautomate.com/#website",
   name: "HowAutomate",
   url: "https://howautomate.com",
   potentialAction: {

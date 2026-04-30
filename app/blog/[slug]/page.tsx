@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = posts[slug];
   if (!post) return {};
   return {
-    title: `${post.title} | HowAutomate Blog`,
+    title: `${post.title} | HowAutomate`,
     description: post.excerpt,
     alternates: { canonical: `https://howautomate.com/blog/${slug}` },
     openGraph: {
@@ -41,21 +41,46 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: `https://howautomate.com${post.image}`,
+    image: { "@type": "ImageObject", url: `https://howautomate.com${post.image}`, width: 1200, height: 630 },
     datePublished: toISODate(post.date),
     dateModified: toISODate(post.date),
-    author: { "@type": "Person", name: "Amit Singh", url: "https://howautomate.com/about", jobTitle: "Founder, HowAutomate" },
-    publisher: { "@type": "Organization", name: "HowAutomate", logo: { "@type": "ImageObject", url: "https://howautomate.com/assets/logo-transparent.webp" } },
+    author: {
+      "@type": "Person",
+      name: "Amit Singh",
+      url: "https://howautomate.com/about",
+      sameAs: "https://www.linkedin.com/in/amit-singh-howautomate",
+      jobTitle: "Founder, HowAutomate",
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": "https://howautomate.com/#organization",
+      name: "HowAutomate",
+      url: "https://howautomate.com",
+      logo: { "@type": "ImageObject", url: "https://howautomate.com/favicon.png", width: 512, height: 512 },
+    },
     url: `https://howautomate.com/blog/${slug}`,
     mainEntityOfPage: { "@type": "WebPage", "@id": `https://howautomate.com/blog/${slug}` },
-    keywords: post.category,
+    keywords: [post.category],
     wordCount: post.body.join(" ").split(/\s+/).length,
     inLanguage: "en",
+    isAccessibleForFree: true,
+    articleSection: post.category,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://howautomate.com/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://howautomate.com/blog/${slug}` },
+    ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <BlogPostContent post={post} slug={slug} />
     </>
   );

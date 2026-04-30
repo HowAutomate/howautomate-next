@@ -8,9 +8,47 @@ export const metadata: Metadata = {
   openGraph: { type: "website", title: "Clinic Automation | HowAutomate", url: "https://howautomate.com/services/clinic-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://howautomate.com/services/clinic-automation#service",
+  name: "Clinic Automation for Dental & Medical Practices",
+  description: "End-to-end automation for dental and medical clinics — AI receptionist, appointment booking, patient follow-ups, and billing reminders.",
+  url: "https://howautomate.com/services/clinic-automation",
+  serviceType: "Business Process Automation",
+  provider: { "@type": "Organization", "@id": "https://howautomate.com/#organization", name: "HowAutomate", url: "https://howautomate.com" },
+  areaServed: { "@type": "Country", name: "India" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "Does the AI receptionist sound natural?", acceptedAnswer: { "@type": "Answer", text: "Yes. We use advanced voice AI that handles conversational booking, understands appointment types, and escalates complex queries to your staff seamlessly — patients often cannot tell the difference." } },
+    { "@type": "Question", name: "Which clinic management software do you integrate with?", acceptedAnswer: { "@type": "Answer", text: "We work with Practo, Medinous, ClinicPRO, and can integrate with any system that has an API or data export. Custom setups are also supported." } },
+    { "@type": "Question", name: "What happens if the AI cannot handle a patient query?", acceptedAnswer: { "@type": "Answer", text: "The AI automatically escalates to a human staff member via call transfer or WhatsApp notification, so no patient is left without a response." } },
+    { "@type": "Question", name: "How are patient reminders sent?", acceptedAnswer: { "@type": "Answer", text: "Via SMS, WhatsApp, and email — depending on patient preferences. Reminders go out at configurable intervals, for example 48 hours and 2 hours before the appointment." } },
+    { "@type": "Question", name: "Is patient data handled securely?", acceptedAnswer: { "@type": "Answer", text: "All patient data is encrypted at rest and in transit. We follow healthcare data security best practices and work within your existing compliance requirements." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://howautomate.com/services" },
+    { "@type": "ListItem", position: 3, name: "Clinic Automation", item: "https://howautomate.com/services/clinic-automation" },
+  ],
+};
+
 export default function ClinicAutomationPage() {
   return (
-    <IndustryLanding
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <IndustryLanding
       industry="Dental & Medical Clinics"
       headline="Stop Losing Patients to Missed Calls and Manual Workflows"
       subheadline="We automate appointment booking, patient follow-ups, and clinic operations — so your staff focuses on care, not paperwork."
@@ -43,5 +81,6 @@ We integrate with common clinic management systems including Practo, Medinous, a
         { q: "Is patient data handled securely?", a: "All patient data is encrypted at rest and in transit. We follow healthcare data security best practices and work within your existing compliance requirements." },
       ]}
     />
+    </>
   );
 }

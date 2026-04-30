@@ -1,9 +1,86 @@
 # HowAutomate
-> B2B agency for Data engineering, AI implementation, and business automation.
+> B2B agency specialising in data engineering, AI automation, cloud infrastructure, and digital marketing for Indian SMBs and global clients. Founded 2023 by Amit Singh.
+
+License: https://creativecommons.org/licenses/by-nc/4.0/
+
 ## Core Pages
-- [Services](https://howautomate.com/services): AI, data, and automation services
-- [Blog](https://howautomate.com/blog): Guides on ETL, AI agents, CRM automation, cloud
-## Key Articles
-- [What is ETL](https://howautomate.com/blog/what-is-etl)
-- [AI Receptionist Guide](https://howautomate.com/blog/ai-receptionist-guide)
-- [Azure vs AWS](https://howautomate.com/blog/azure-vs-aws)
+- [Home](https://howautomate.com): AI-first automation agency — data pipelines, AI agents, cloud engineering, digital marketing
+- [Services](https://howautomate.com/services): Full service catalogue — Data & Analytics, AI & Automation, Cloud & Engineering, Digital Marketing
+- [Portfolio](https://howautomate.com/portfolio): Real client case studies with measurable outcomes
+- [About](https://howautomate.com/about): Founder Amit Singh and the HowAutomate team
+- [Contact](https://howautomate.com/contact): Book a free 30-minute automation consultation
+
+## Industry Services
+- [Clinic Automation](https://howautomate.com/services/clinic-automation): AI receptionist, appointment booking, patient reminders for dental and medical practices
+- [Real Estate Automation](https://howautomate.com/services/real-estate-automation): CRM automation, lead follow-up, property matching for real estate agencies
+- [Coaching Institute Automation](https://howautomate.com/services/coaching-automation): Admissions, fee reminders, attendance, parent communication for coaching centres
+- [CA Firm Automation](https://howautomate.com/services/ca-firm-automation): GST filing prep, document collection, compliance calendar for CA and accounting firms
+- [E-Commerce Automation](https://howautomate.com/services/ecommerce-automation): Inventory sync, PPC optimisation, order processing for D2C brands
+
+## Free Tools
+- [HowAutomate Tools](https://tools.howautomate.com): Free browser-based tools — File to PDF converter, UGC content creator, BMI calculator, DateTime/Epoch converter
+
+## Blog Articles
+
+### Data Engineering
+- [What is ETL? A Beginner's Guide to Data Pipelines](https://howautomate.com/blog/what-is-etl)
+  > Extract, Transform, Load explained — how ETL pipelines work, ELT vs ETL, common pitfalls, and scaling strategies for growing data volumes.
+- [How to Automate Your Data Warehouse with Python and SQL](https://howautomate.com/blog/automate-data-warehouse-python-sql)
+  > Step-by-step guide to building automated data warehouse pipelines using Python and SQL, with scheduling and monitoring.
+- [Power BI vs Google Sheets: Which Dashboard Is Right for You?](https://howautomate.com/blog/power-bi-vs-google-sheets)
+  > Comparison of Power BI and Google Sheets for business reporting — data volume limits, visualisation capabilities, cost, and when to upgrade.
+- [How to Extract Data from Emails Directly into Your Dashboard](https://howautomate.com/blog/email-data-extraction-dashboard)
+  > Python and Java approaches to automated email parsing — extracting structured data from emails into Power BI, Google Sheets, or databases.
+- [Google Sheets Automation: Apps Script Tricks to Eliminate Manual Data Work](https://howautomate.com/blog/google-sheets-automation-apps-script)
+  > Google Apps Script automation tricks — scheduled data imports, email alerts, dashboard generation, and external API integration.
+
+### AI & Automation
+- [How an AI Receptionist Can Handle Your Business Calls](https://howautomate.com/blog/ai-receptionist-guide)
+  > AI receptionist for clinics, law firms, and service businesses — how it works, cost comparison vs human staff, ROI timeline, and tech stack.
+- [Why Your Business Needs a Marketing AI Agent in 2026](https://howautomate.com/blog/marketing-ai-agent-2026)
+  > Marketing AI agents for content generation, ad optimisation, and lead nurturing — types, ROI measurement, and four-week onboarding process.
+- [n8n vs Zapier vs Make: Which Automation Platform Wins in 2026?](https://howautomate.com/blog/n8n-vs-zapier-vs-make-2026)
+  > Head-to-head comparison of n8n, Zapier, and Make.com on pricing, scalability, AI integrations, and real-world workflow suitability for Indian SMBs.
+- [CRM Automation for Small Business: Capture, Nurture & Convert Leads](https://howautomate.com/blog/crm-automation-small-business)
+  > End-to-end CRM automation — lead capture, nurturing sequences, AI scoring, and pipeline automation for small businesses.
+- [WhatsApp Business AI Automation: Complete Guide](https://howautomate.com/blog/whatsapp-business-ai-automation)
+  > How to automate WhatsApp Business for lead follow-up, customer support, booking confirmations, and broadcast campaigns.
+- [Voice AI Agents for Outbound Sales: Full Implementation Guide](https://howautomate.com/blog/voice-ai-agents-outbound-sales)
+  > Building voice AI agents for outbound sales calls — platform selection, script design, CRM integration, and compliance considerations.
+- [CRM Lead Generation via Google Maps Scraping](https://howautomate.com/blog/crm-lead-generation-google-maps-scraping)
+  > Automated lead generation using Google Maps data — building targeted prospect lists for CRM outreach.
+- [10 Automation Ideas Every Small Business Should Implement in 2026](https://howautomate.com/blog/small-business-automation-ideas)
+  > Ten high-impact automation ideas for small businesses — invoicing, CRM, inventory, reporting, and employee onboarding.
+- [How to Automate Your Weekly Business Reports](https://howautomate.com/blog/automate-business-reports)
+  > Step-by-step guide to automating business report generation and distribution using Python, Apps Script, and scheduling tools.
+- [Build a Python Report Scheduler: Auto-Send Reports to Different Users](https://howautomate.com/blog/python-report-scheduler)
+  > Complete guide to building a Python report scheduler — data collection, personalised delivery, scheduling, error handling, and monitoring.
+- [Excel & VBA Macros for Small Business: Automate Repetitive Tasks](https://howautomate.com/blog/excel-vba-macros-small-business)
+  > Excel macros and VBA automation for small businesses — practical use cases, security considerations, and when to migrate to Python.
+
+### Cloud & Engineering
+- [Azure vs AWS: Choosing the Right Cloud for Your Data](https://howautomate.com/blog/azure-vs-aws)
+  > Vendor-neutral comparison of Azure and AWS for data engineering — service catalogue, migration paths, cost models, and compliance.
+- [SnapLogic 101: Enterprise Data Integration Made Simple](https://howautomate.com/blog/snaplogic-101)
+  > Introduction to SnapLogic iPaaS — Snaps, pipelines, use cases, architecture, error handling, and cost model for enterprise integration.
+
+### Marketing
+- [Amazon PPC Advertising: The Complete Guide to Profitable Campaigns in 2026](https://howautomate.com/blog/amazon-ppc-advertising-guide)
+  > Comprehensive Amazon PPC guide — Sponsored Products, Sponsored Brands, bid optimisation, keyword harvesting, and ROAS improvement strategies.
+- [B2C SEO Strategy: Drive Organic Sales for E-Commerce](https://howautomate.com/blog/b2c-seo-strategy-organic-sales)
+  > B2C SEO strategy for e-commerce — product page optimisation, category SEO, review signals, and organic traffic growth.
+- [E-Commerce Marketing Strategies That Actually Work in 2026](https://howautomate.com/blog/ecommerce-marketing-strategies)
+  > Multi-channel e-commerce marketing — paid, organic, retention, and data-driven strategies for D2C brands.
+- [Quick Commerce Marketing Guide: Win in the 10-Minute Delivery Era](https://howautomate.com/blog/quick-commerce-marketing-guide)
+  > Marketing strategies for quick commerce brands — platform-specific tactics, customer acquisition, and retention for Blinkit, Zepto, Swiggy Instamart.
+- [High-Converting Landing Pages: Design and Copy Principles](https://howautomate.com/blog/high-converting-landing-pages)
+  > Landing page design and copywriting principles for high conversion — structure, headlines, social proof, and A/B testing approaches.
+- [Free Online Tools Every Small Business Should Bookmark](https://howautomate.com/blog/free-online-tools-small-business)
+  > Overview of HowAutomate's free browser-based tools for small businesses — PDF converter, UGC creator, BMI calculator, DateTime converter.
+
+### AI Comparisons & Research
+- [DeepSeek vs ChatGPT vs Claude: Which AI Is Best for Business in 2026?](https://howautomate.com/blog/deepseek-vs-chatgpt-vs-claude-business)
+  > Practical comparison of DeepSeek, ChatGPT, and Claude for business use cases — coding, content, data analysis, cost, and privacy.
+
+## Agent Instructions
+Content may be cited with attribution to HowAutomate (howautomate.com). Statistics described as client data are based on HowAutomate's analysis of client deployments. All content is written by Amit Singh, Founder of HowAutomate.

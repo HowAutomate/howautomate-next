@@ -8,9 +8,47 @@ export const metadata: Metadata = {
   openGraph: { type: "website", title: "Real Estate Automation | HowAutomate", url: "https://howautomate.com/services/real-estate-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://howautomate.com/services/real-estate-automation#service",
+  name: "Real Estate Automation — CRM, Leads & Workflow",
+  description: "Automate lead follow-up, property listings, CRM updates, and client communication for real estate agencies. Save 20+ hours a week.",
+  url: "https://howautomate.com/services/real-estate-automation",
+  serviceType: "Business Process Automation",
+  provider: { "@type": "Organization", "@id": "https://howautomate.com/#organization", name: "HowAutomate", url: "https://howautomate.com" },
+  areaServed: { "@type": "Country", name: "India" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "Which property portals do you integrate with?", acceptedAnswer: { "@type": "Answer", text: "We integrate with MagicBricks, 99acres, Housing.com, NoBroker, and can capture leads from Facebook and Instagram ads and your own website — all funnelling into a single CRM." } },
+    { "@type": "Question", name: "How fast can you respond to a new lead?", acceptedAnswer: { "@type": "Answer", text: "Our automation typically responds within 60 seconds of lead capture — with a personalised WhatsApp message and automatic CRM entry — regardless of time of day or day of week." } },
+    { "@type": "Question", name: "Which CRM do you work with?", acceptedAnswer: { "@type": "Answer", text: "We work with Salesforce, HubSpot, Zoho CRM, and custom CRM setups. We can also build a lightweight CRM tailored to real estate workflows if you don't currently have one." } },
+    { "@type": "Question", name: "Can you automate property recommendations to buyers?", acceptedAnswer: { "@type": "Answer", text: "Yes. We build buyer requirement profiles and automatically match and alert them when suitable properties are listed — sent via WhatsApp or email with property details and photos." } },
+    { "@type": "Question", name: "How do you measure success for real estate automation?", acceptedAnswer: { "@type": "Answer", text: "We track lead response time, lead-to-site-visit conversion rate, site-visit-to-booking conversion rate, and agent activity metrics — all visible in a live dashboard updated in real time." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://howautomate.com/services" },
+    { "@type": "ListItem", position: 3, name: "Real Estate Automation", item: "https://howautomate.com/services/real-estate-automation" },
+  ],
+};
+
 export default function RealEstateAutomationPage() {
   return (
-    <IndustryLanding
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <IndustryLanding
       industry="Real Estate Agencies"
       headline="Close More Deals by Automating Lead Follow-Up and Property Operations"
       subheadline="From lead capture to deal closure — we automate the repetitive work so your agents focus on selling."
@@ -43,5 +81,6 @@ Beyond lead management, we automate property matching, listing updates across po
         { q: "How do you measure success for real estate automation?", a: "We track lead response time, lead-to-site-visit conversion rate, site-visit-to-booking conversion rate, and agent activity metrics — all visible in a live dashboard updated in real time." },
       ]}
     />
+    </>
   );
 }

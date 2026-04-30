@@ -8,9 +8,47 @@ export const metadata: Metadata = {
   openGraph: { type: "website", title: "E-Commerce Automation | HowAutomate", url: "https://howautomate.com/services/ecommerce-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://howautomate.com/services/ecommerce-automation#service",
+  name: "E-Commerce Automation — Inventory, Ads & Operations",
+  description: "Automate inventory management, PPC campaigns, order processing, and customer retention for D2C and e-commerce brands in India.",
+  url: "https://howautomate.com/services/ecommerce-automation",
+  serviceType: "Business Process Automation",
+  provider: { "@type": "Organization", "@id": "https://howautomate.com/#organization", name: "HowAutomate", url: "https://howautomate.com" },
+  areaServed: { "@type": "Country", name: "India" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "Which marketplaces do you support for inventory sync?", acceptedAnswer: { "@type": "Answer", text: "We support Amazon India, Flipkart, Meesho, Myntra, Nykaa, and your own Shopify or WooCommerce store. Custom marketplace integrations are available on request." } },
+    { "@type": "Question", name: "How does PPC automation work?", acceptedAnswer: { "@type": "Answer", text: "We build rules-based and AI-driven bidding logic for Amazon Sponsored Products/Brands and Google Shopping. Bids adjust automatically based on ACOS targets, conversion data, and inventory levels — so your budget always works hardest." } },
+    { "@type": "Question", name: "Can you automate post-purchase customer flows?", acceptedAnswer: { "@type": "Answer", text: "Yes. We build post-purchase email and WhatsApp sequences for review requests, feedback collection, loyalty rewards, and win-back campaigns — fully automated based on order status and customer history." } },
+    { "@type": "Question", name: "Do you work with Shopify specifically?", acceptedAnswer: { "@type": "Answer", text: "Yes. We have deep experience with Shopify automation including order management, inventory sync, discount automation, and integration with Indian payment gateways and logistics providers like Shiprocket and Delhivery." } },
+    { "@type": "Question", name: "What size brand do you work with?", acceptedAnswer: { "@type": "Answer", text: "We work with brands doing ₹5L/month GMV and above. The automation approach and pricing scale with your needs — whether you're a single-SKU D2C brand or a multi-category marketplace seller." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://howautomate.com/services" },
+    { "@type": "ListItem", position: 3, name: "E-Commerce Automation", item: "https://howautomate.com/services/ecommerce-automation" },
+  ],
+};
+
 export default function EcommerceAutomationPage() {
   return (
-    <IndustryLanding
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <IndustryLanding
       industry="E-Commerce Brands"
       headline="Scale Your E-Commerce Brand with Data-Driven Automation"
       subheadline="From inventory sync to ad optimisation to customer retention — we automate the operations that eat your margins."
@@ -43,5 +81,6 @@ Our data pipelines bring together sales, inventory, advertising, and customer da
         { q: "What size brand do you work with?", a: "We work with brands doing ₹5L/month GMV and above. The automation approach and pricing scale with your needs — whether you're a single-SKU D2C brand or a multi-category marketplace seller." },
       ]}
     />
+    </>
   );
 }
