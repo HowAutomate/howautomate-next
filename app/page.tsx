@@ -39,6 +39,7 @@ const organizationSchema = {
     "https://www.youtube.com/@HowAutomate",
     "https://github.com/HowAutomate",
     "https://www.wikidata.org/wiki/Q139551649",
+    "https://clutch.co/profile/howautomate",
   ],
 };
 
