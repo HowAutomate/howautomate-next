@@ -201,7 +201,7 @@ export default function ServicesContent() {
         <div className="container mx-auto relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">What We Offer</span>
-            <h1 className="text-5xl md:text-6xl font-bold mt-3 mb-6 text-foreground">Our <span className="gradient-text">Services</span></h1>
+            <h1 className="text-5xl md:text-6xl font-bold mt-3 mb-6 text-foreground">Data, AI & Automation <span className="gradient-text">Services</span></h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Four core pillars. Twenty-two specialised services. Click any service to explore details, benefits, and outcomes.</p>
           </motion.div>
         </div>

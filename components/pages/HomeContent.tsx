@@ -9,6 +9,7 @@ import {
   Phone, Search, Rocket, Zap, Database, Cpu,
 } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
+import { postsList } from '@/lib/posts'
 
 /* ─── constants ─────────────────────────────────────────── */
 
@@ -446,6 +447,59 @@ function ProcessSection() {
   )
 }
 
+/* ─── featured posts ─────────────────────────────────────── */
+
+const featuredSlugs = ['n8n-vs-zapier-vs-make-2026', 'ai-receptionist-guide', 'crm-automation-small-business']
+
+function FeaturedPostsSection() {
+  const featured = featuredSlugs.map(slug => postsList.find(p => p.slug === slug)).filter(Boolean) as typeof postsList
+
+  return (
+    <section style={{ background: 'rgba(255,255,255,0.015)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '80px 0' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
+          <span style={{ color: '#a78bfa', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Latest Insights</span>
+          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.025em' }}>From the Blog</h2>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', margin: 0 }}>Practical guides on automation, AI, and data engineering.</p>
+        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginBottom: 32 }}>
+          {featured.map((post, i) => (
+            <motion.div key={post.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
+              className="glow-card" onMouseMove={glowHandler}
+              whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.14)' } as any}
+              style={{ ...CARD, overflow: 'hidden', transition: 'all 0.2s' }}
+            >
+              <Link href={`/blog/${post.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
+                <div style={{ height: 160, overflow: 'hidden', position: 'relative' }}>
+                  <img src={post.image} alt={post.title} width={400} height={160} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,4,15,0.7), transparent)' }} />
+                  <span style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(124,58,237,0.75)', color: '#e9d5ff', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>{post.category}</span>
+                </div>
+                <div style={{ padding: 20 }}>
+                  <h3 style={{ fontWeight: 700, fontSize: 15, color: '#fff', lineHeight: 1.4, margin: '0 0 8px' }}>{post.title}</h3>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.6, margin: '0 0 14px' }}>{post.excerpt}</p>
+                  <span style={{ color: '#a78bfa', fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                    Read more <ArrowRight size={13} />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center">
+          <Link href="/blog"
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', padding: '11px 24px', borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'background 0.15s' }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+          >
+            View All Articles <ArrowRight size={15} />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 /* ─── cta ────────────────────────────────────────────────── */
 
 function CTASection() {
@@ -494,6 +548,7 @@ export default function HomeContent() {
       <ServicesSection />
       <OutcomesSection />
       <SocialProofSection />
+      <FeaturedPostsSection />
       <ToolsSection />
       <ProcessSection />
       <CTASection />

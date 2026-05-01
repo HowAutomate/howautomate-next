@@ -3,12 +3,12 @@ import HomeContent from "@/components/pages/HomeContent";
 
 export const metadata: Metadata = {
   title: "HowAutomate — Data, AI & Automation for Modern Businesses",
-  description: "HowAutomate helps businesses automate workflows, build data pipelines, deploy AI agents, and migrate to the cloud. Book a free call today.",
+  description: "HowAutomate helps Indian and global SMBs automate workflows, build data pipelines, and deploy AI agents. Expert B2B automation agency. Book a free call today.",
   alternates: { canonical: "https://howautomate.com" },
   openGraph: {
     type: "website",
     title: "HowAutomate — Data, AI & Automation for Modern Businesses",
-    description: "HowAutomate helps businesses automate workflows, build data pipelines, deploy AI agents, and migrate to the cloud. Book a free call today.",
+    description: "HowAutomate helps Indian and global SMBs automate workflows, build data pipelines, and deploy AI agents. Expert B2B automation agency. Book a free call today.",
     url: "https://howautomate.com",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },

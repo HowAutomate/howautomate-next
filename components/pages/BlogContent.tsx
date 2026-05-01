@@ -38,9 +38,9 @@ export default function BlogContent() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full bg-primary/8 blur-3xl pointer-events-none" />
         <div className="container mx-auto relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">Resources</span>
-            <h1 className="text-5xl md:text-6xl font-bold mt-3 mb-6 text-foreground">Blog & <span className="gradient-text">Insights</span></h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Practical guides, deep dives, and industry insights from our team of data and AI specialists.</p>
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">Automation Guides</span>
+            <h1 className="text-5xl md:text-6xl font-bold mt-3 mb-6 text-foreground">AI & Automation <span className="gradient-text">Blog</span></h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Practical guides on workflow automation, AI agents, ETL pipelines, and digital marketing — written by our team for founders, analysts, and developers.</p>
           </motion.div>
         </div>
       </section>
