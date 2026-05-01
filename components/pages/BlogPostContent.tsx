@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { type Post, posts } from "@/lib/posts";
+import { postFaqs } from "@/lib/post-faqs";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -105,6 +106,22 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
             );
           })}
         </div>
+
+        {postFaqs[slug] && (
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-12">
+            <h2 className="text-2xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {postFaqs[slug].map((faq, i) => (
+                <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeUp}
+                  className="rounded-xl border border-border bg-accent/30 p-5"
+                >
+                  <h3 className="font-semibold text-foreground mb-2">{faq.q}</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{faq.a}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-14 rounded-2xl border border-border p-6 flex gap-5 items-start">
           <img src="/assets/amit-singh-howautomate.webp" alt="Amit Singh" width={64} height={64} loading="lazy" className="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-primary/20" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />

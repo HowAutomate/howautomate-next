@@ -372,7 +372,7 @@ export const posts: Record<string, Post> = {
   "crm-lead-generation-google-maps-scraping": {
     title: "AI-Powered CRM Lead Generation: Scrape Google Maps, Enrich & Auto-Email Prospects",
     category: "AI", readTime: "9 min read", date: "Apr 16, 2026",
-    image: "/assets/blog-crm-lead-scraping.jpg",
+    image: "/assets/blog-crm-lead-scraping.webp",
     excerpt: "Stop buying cold lists. Build a fully automated lead engine that scrapes Google Maps, enriches each prospect, stores it in Google Sheets, and sends personalised emails with follow-ups — on autopilot.",
     body: [
       "Cold lists are dead. Most purchased B2B databases are stale, generic, and shared with hundreds of other senders — which is exactly why your reply rate hovers near zero. The businesses winning at outbound in 2026 aren't buying leads — they're building their own lead engine that pulls fresh, hyper-targeted prospects directly from Google Maps, enriches them with public data, and reaches out with messages that actually feel personal.",
@@ -390,7 +390,7 @@ export const posts: Record<string, Post> = {
   "n8n-vs-zapier-vs-make-2026": {
     title: "n8n vs Zapier vs Make: Which Automation Platform Wins in 2026?",
     category: "Automation", readTime: "8 min read", date: "Apr 20, 2026",
-    image: "/assets/blog-n8n-vs-zapier.jpg",
+    image: "/assets/blog-n8n-vs-zapier.webp",
     excerpt: "We benchmark Zapier, Make, and n8n on price, scalability, AI integrations, and real client workflows so you pick the right tool — not the trendiest one.",
     body: [
       "If you've spent more than ten minutes researching workflow automation in 2026, you've hit the same three names: **Zapier, Make, and n8n**. They all promise to connect your apps, eliminate manual work, and give you back hours every week. But under the hood, they're built for very different teams, budgets, and use cases — and choosing wrong is one of the most expensive mistakes a small business can make.",
@@ -407,7 +407,7 @@ export const posts: Record<string, Post> = {
   "whatsapp-business-ai-automation": {
     title: "WhatsApp Business AI Automation: 24/7 Sales & Support on Autopilot",
     category: "AI", readTime: "9 min read", date: "Apr 19, 2026",
-    image: "/assets/blog-whatsapp-ai-automation.jpg",
+    image: "/assets/blog-whatsapp-ai-automation.webp",
     excerpt: "Build AI-powered WhatsApp bots that qualify leads, book appointments, recover abandoned carts, and resolve 80% of support tickets — without a human touching the keyboard.",
     body: [
       "Email open rates are dying. SMS feels intrusive. Phone calls go unanswered. But WhatsApp? **98% open rate, 45% reply rate, and your customers are checking it 23 times a day.** In India, Brazil, the Middle East, and across most of Asia and Africa, WhatsApp isn't just a messaging app — it's the primary channel where buying decisions happen. The businesses winning in 2026 have figured out how to combine the WhatsApp Business API with modern LLMs to run sales and support 24/7, in any language, at a fraction of the cost of a human team.",
@@ -424,7 +424,7 @@ export const posts: Record<string, Post> = {
   "voice-ai-agents-outbound-sales": {
     title: "Voice AI Agents for Outbound Sales: The New SDR Stack in 2026",
     category: "AI", readTime: "8 min read", date: "Apr 18, 2026",
-    image: "/assets/blog-voice-ai-sales.jpg",
+    image: "/assets/blog-voice-ai-sales.webp",
     excerpt: "AI voice agents now make cold calls, qualify prospects, handle objections, and book demos at 1/10th the cost of a human SDR. Here's how the new stack works.",
     body: [
       "Hiring a sales development rep (SDR) in 2026 costs roughly $60,000–$90,000 a year fully loaded, and the average SDR makes 50–80 calls a day with a 2% connect rate. The maths has never quite worked. What's changed in the last 12 months is that **AI voice agents — built on real-time speech models like ElevenLabs, OpenAI Realtime, Vapi, Bland AI, and Retell — can now hold genuinely natural-sounding sales conversations**, qualify prospects, handle objections, and book demos directly into your calendar. At roughly $0.10 per minute of call time, the unit economics finally work.",
@@ -442,7 +442,7 @@ export const posts: Record<string, Post> = {
   "deepseek-vs-chatgpt-vs-claude-business": {
     title: "DeepSeek vs ChatGPT vs Claude: Which LLM Should You Use for Business Automation?",
     category: "AI", readTime: "7 min read", date: "Apr 17, 2026",
-    image: "/assets/blog-deepseek-vs-chatgpt.jpg",
+    image: "/assets/blog-deepseek-vs-chatgpt.webp",
     excerpt: "DeepSeek is dirt cheap. Claude reasons best. GPT-4o is the all-rounder. We compare cost, speed, accuracy, and tool-use across real automation workloads.",
     body: [
       "Eighteen months ago, the LLM choice for business automation was easy: use OpenAI's GPT-4 and pay whatever they charged. In 2026, that's no longer true. **DeepSeek has crashed pricing by 90%**, **Claude 3.7 Sonnet has overtaken GPT-4o on reasoning benchmarks**, and **open-source models like Llama 3.3 and Qwen 2.5 now run locally on a laptop** with quality that would have been state-of-the-art a year ago.",
@@ -460,11 +460,11 @@ export const posts: Record<string, Post> = {
 };
 
 export const postsList = [
-  { title: "n8n vs Zapier vs Make: Which Automation Platform Wins in 2026?", excerpt: "Zapier is easy. Make is visual. n8n is open-source and self-hostable. We benchmark all three on price, scalability, AI integrations, and real client workflows — so you pick the right tool, not the trendiest one.", category: "Automation", readTime: "8 min read", date: "Apr 20, 2026", image: "/assets/blog-n8n-vs-zapier.jpg", slug: "n8n-vs-zapier-vs-make-2026" },
-  { title: "WhatsApp Business AI Automation: 24/7 Sales & Support on Autopilot", excerpt: "WhatsApp is where your customers actually reply. Learn how to build AI-powered WhatsApp bots that qualify leads, book appointments, recover abandoned carts, and resolve 80% of support tickets — without a human touching the keyboard.", category: "AI", readTime: "9 min read", date: "Apr 19, 2026", image: "/assets/blog-whatsapp-ai-automation.jpg", slug: "whatsapp-business-ai-automation" },
-  { title: "Voice AI Agents for Outbound Sales: The New SDR Stack in 2026", excerpt: "AI voice agents now make cold calls, qualify prospects, handle objections, and book demos — at 1/10th the cost of a human SDR. Here's how the new stack works, what it costs, and where it still falls short.", category: "AI", readTime: "8 min read", date: "Apr 18, 2026", image: "/assets/blog-voice-ai-sales.jpg", slug: "voice-ai-agents-outbound-sales" },
-  { title: "DeepSeek vs ChatGPT vs Claude: Which LLM Should You Use for Business Automation?", excerpt: "DeepSeek is dirt cheap. Claude reasons best. GPT-4o is the all-rounder. We compare cost, speed, accuracy, and tool-use across real automation workloads — so you stop overpaying for the wrong model.", category: "AI", readTime: "7 min read", date: "Apr 17, 2026", image: "/assets/blog-deepseek-vs-chatgpt.jpg", slug: "deepseek-vs-chatgpt-vs-claude-business" },
-  { title: "AI-Powered CRM Lead Generation: Scrape Google Maps, Enrich & Auto-Email Prospects", excerpt: "Stop buying cold lists. Learn how to scrape qualified leads from Google Maps, enrich them with website, Instagram, ratings, email & mobile data, push to Google Sheets, and trigger personalised email sequences with automated follow-ups.", category: "AI", readTime: "9 min read", date: "Apr 16, 2026", image: "/assets/blog-crm-lead-scraping.jpg", slug: "crm-lead-generation-google-maps-scraping" },
+  { title: "n8n vs Zapier vs Make: Which Automation Platform Wins in 2026?", excerpt: "Zapier is easy. Make is visual. n8n is open-source and self-hostable. We benchmark all three on price, scalability, AI integrations, and real client workflows — so you pick the right tool, not the trendiest one.", category: "Automation", readTime: "8 min read", date: "Apr 20, 2026", image: "/assets/blog-n8n-vs-zapier.webp", slug: "n8n-vs-zapier-vs-make-2026" },
+  { title: "WhatsApp Business AI Automation: 24/7 Sales & Support on Autopilot", excerpt: "WhatsApp is where your customers actually reply. Learn how to build AI-powered WhatsApp bots that qualify leads, book appointments, recover abandoned carts, and resolve 80% of support tickets — without a human touching the keyboard.", category: "AI", readTime: "9 min read", date: "Apr 19, 2026", image: "/assets/blog-whatsapp-ai-automation.webp", slug: "whatsapp-business-ai-automation" },
+  { title: "Voice AI Agents for Outbound Sales: The New SDR Stack in 2026", excerpt: "AI voice agents now make cold calls, qualify prospects, handle objections, and book demos — at 1/10th the cost of a human SDR. Here's how the new stack works, what it costs, and where it still falls short.", category: "AI", readTime: "8 min read", date: "Apr 18, 2026", image: "/assets/blog-voice-ai-sales.webp", slug: "voice-ai-agents-outbound-sales" },
+  { title: "DeepSeek vs ChatGPT vs Claude: Which LLM Should You Use for Business Automation?", excerpt: "DeepSeek is dirt cheap. Claude reasons best. GPT-4o is the all-rounder. We compare cost, speed, accuracy, and tool-use across real automation workloads — so you stop overpaying for the wrong model.", category: "AI", readTime: "7 min read", date: "Apr 17, 2026", image: "/assets/blog-deepseek-vs-chatgpt.webp", slug: "deepseek-vs-chatgpt-vs-claude-business" },
+  { title: "AI-Powered CRM Lead Generation: Scrape Google Maps, Enrich & Auto-Email Prospects", excerpt: "Stop buying cold lists. Learn how to scrape qualified leads from Google Maps, enrich them with website, Instagram, ratings, email & mobile data, push to Google Sheets, and trigger personalised email sequences with automated follow-ups.", category: "AI", readTime: "9 min read", date: "Apr 16, 2026", image: "/assets/blog-crm-lead-scraping.webp", slug: "crm-lead-generation-google-maps-scraping" },
   { title: "How to Automate Your Data Warehouse with Python & SQL", excerpt: "Manual data loads are slow, error-prone, and unscalable. Learn how Python and SQL can fully automate your data warehouse — from ingestion to transformation to scheduled refreshes.", category: "Data", readTime: "7 min read", date: "Apr 5, 2026", image: "/assets/blog-data-warehouse-python.webp", slug: "automate-data-warehouse-python-sql" },
   { title: "What is ETL? A Beginner's Guide to Data Pipelines", excerpt: "Extract, Transform, Load — the three steps that move your data from source to insights. We break down exactly how ETL works and why every data-driven business needs it.", category: "Data", readTime: "5 min read", date: "Feb 10, 2026", image: "/assets/blog-etl-guide.webp", slug: "what-is-etl" },
   { title: "How an AI Receptionist Can Handle Your Business Calls", excerpt: "Imagine never missing a call, never double-booking, and never wasting staff time on routine enquiries. Here's how AI voice agents are transforming small business operations.", category: "AI", readTime: "7 min read", date: "Feb 3, 2026", image: "/assets/blog-ai-receptionist.webp", slug: "ai-receptionist-guide" },
