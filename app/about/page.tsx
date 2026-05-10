@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import AboutContent from "@/components/pages/AboutContent";
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://howautomate.com" },
+    { "@type": "ListItem", position: 2, name: "About", item: "https://howautomate.com/about" },
+  ],
+};
+
 const aboutSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
@@ -28,6 +37,7 @@ export default function AboutPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <AboutContent />
     </>
   );

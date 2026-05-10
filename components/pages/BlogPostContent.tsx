@@ -160,7 +160,7 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
               {otherSlugs.map((s) => {
                 const related = posts[s];
                 return (
-                  <Link key={s} href={`/blog/${s}`} className="group glass-card glow-card rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300" onMouseMove={(e) => { const el = e.currentTarget as HTMLElement; const r = el.getBoundingClientRect(); el.style.setProperty('--x', `${e.clientX - r.left}px`); el.style.setProperty('--y', `${e.clientY - r.top}px`) }}>
+                  <Link key={s} href={`/blog/${s}`} className="group glass-card glow-card rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300" onMouseMove={(e) => { const el = e.currentTarget as HTMLElement; const x = e.clientX, y = e.clientY; requestAnimationFrame(() => { const r = el.getBoundingClientRect(); el.style.setProperty('--x', `${x - r.left}px`); el.style.setProperty('--y', `${y - r.top}px`) }) }}>
                     <img src={related.image} alt={related.title} width={400} height={128} loading="lazy" className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="p-4">
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${categoryStyle[related.category]}`}>{related.category}</span>

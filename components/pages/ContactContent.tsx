@@ -14,9 +14,12 @@ const fadeUp = {
 
 function glowHandler(e: React.MouseEvent) {
   const el = e.currentTarget as HTMLElement
-  const rect = el.getBoundingClientRect()
-  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
-  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+  const x = e.clientX, y = e.clientY
+  requestAnimationFrame(() => {
+    const rect = el.getBoundingClientRect()
+    el.style.setProperty('--x', `${x - rect.left}px`)
+    el.style.setProperty('--y', `${y - rect.top}px`)
+  })
 }
 
 const services = ["Data Analysis","ETL Pipeline","Power BI Dashboard","Google Sheets Automation","Report Automation","Web Crawlers","AI Receptionist","Marketing AI Agent","Workflow Automation","API Integration","Azure Solutions","AWS Architecture","SnapLogic Integration","Website / Web App","Amazon PPC Management","B2C SEO & Content","E-Commerce Marketing","Quick Commerce Marketing","Other / Not Sure"];

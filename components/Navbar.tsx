@@ -3,15 +3,16 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, FileText, Sparkle, Heart, Clock, ExternalLink } from 'lucide-react'
+import { Menu, X, FileText, Sparkle, Heart, Clock, ExternalLink, Braces } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import logo from '@/assets/logo-transparent.webp'
 
 const tools = [
-  { icon: FileText, label: 'File to PDF Converter' },
-  { icon: Sparkle,  label: 'UGC Content Creation'  },
-  { icon: Heart,    label: 'BMI Calculator'         },
-  { icon: Clock,    label: 'DateTime ↔ Epoch'       },
+  { icon: FileText, label: 'File to PDF Converter',       href: 'https://tools.howautomate.com' },
+  { icon: Sparkle,  label: 'UGC Content Creation',        href: 'https://tools.howautomate.com' },
+  { icon: Heart,    label: 'BMI Calculator',              href: 'https://tools.howautomate.com' },
+  { icon: Clock,    label: 'DateTime ↔ Epoch',            href: 'https://tools.howautomate.com' },
+  { icon: Braces,   label: 'JSON → TypeScript & Zod',     href: 'https://tools.howautomate.com/json-to-typescript-zod' },
 ]
 
 const navLinks = [
@@ -89,7 +90,7 @@ export default function Navbar() {
                   <div style={{ background: 'rgba(15,10,30,0.96)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: 10, width: 240, boxShadow: '0 20px 60px rgba(0,0,0,0.6)' }}>
                     <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.1em', padding: '4px 8px 8px' }}>Free Tools</p>
                     {tools.map(t => (
-                      <a key={t.label} href="https://tools.howautomate.com" target="_blank" rel="noopener noreferrer"
+                      <a key={t.label} href={t.href} target="_blank" rel="noopener noreferrer"
                         style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.15s' }}
                         onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
                         onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}

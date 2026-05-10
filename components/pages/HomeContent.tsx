@@ -178,9 +178,9 @@ function HeroSection() {
         <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
           style={{ fontSize: 'clamp(2.4rem,5.5vw,4rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.035em', margin: '0 0 20px' }}
         >
-          The Answer to{' '}
+          Automation Agency —{' '}
           <span style={{ background: 'linear-gradient(135deg,#a78bfa 0%,#60a5fa 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-            "How Do I Automate This?"
+            How Do I Automate This?
           </span>
         </motion.h1>
 

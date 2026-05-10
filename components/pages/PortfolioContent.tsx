@@ -12,9 +12,12 @@ const fadeUp = {
 
 function glowHandler(e: React.MouseEvent) {
   const el = e.currentTarget as HTMLElement
-  const rect = el.getBoundingClientRect()
-  el.style.setProperty('--x', `${e.clientX - rect.left}px`)
-  el.style.setProperty('--y', `${e.clientY - rect.top}px`)
+  const x = e.clientX, y = e.clientY
+  requestAnimationFrame(() => {
+    const rect = el.getBoundingClientRect()
+    el.style.setProperty('--x', `${x - rect.left}px`)
+    el.style.setProperty('--y', `${y - rect.top}px`)
+  })
 }
 
 const categories = ["All", "Data", "AI", "Cloud", "Marketing"];
