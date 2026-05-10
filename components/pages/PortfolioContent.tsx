@@ -22,23 +22,16 @@ function glowHandler(e: React.MouseEvent) {
 
 const categories = ["All", "Data", "AI", "Cloud", "Marketing"];
 
-const projects = [
-  { title: "AI CRM Lead Engine: Google Maps → Sheets → Auto-Email", category: "AI", tech: ["n8n", "Google Maps API", "OpenAI", "Google Sheets", "Gmail API"], description: "Built a fully automated B2B lead engine: scraped Google Maps + websites + Instagram, enriched each lead with AI-written hooks, stored in Google Sheets CRM, and sent personalised emails with 3-step follow-ups. Generated 2,400 fresh leads & 47 booked demos in the first 30 days.", image: "/assets/portfolio-crm-lead-gen.webp" },
-  { title: "AI Telegram Bot for 24/7 Customer Support", category: "AI", tech: ["Telegram Bot API", "n8n", "OpenAI GPT-4", "Supabase", "Webhooks"], description: "Built an AI-powered Telegram bot handling 1,500+ customer queries/day — auto-replies with GPT-4, escalates complex issues to human agents, captures leads into CRM, and sends order updates. Cut support response time from 4 hours to under 10 seconds and reduced support costs by 65%.", image: "/assets/portfolio-telegram-bot.webp" },
-  { title: "Retail Sales Analytics Dashboard", category: "Data", tech: ["Power BI", "SQL", "Azure"], description: "Built a real-time Power BI dashboard tracking 2M+ sales records across 50 retail locations, reducing report generation time by 90%.", image: "/assets/portfolio-retail-dashboard.webp" },
-  { title: "AI Receptionist for Medical Clinic", category: "AI", tech: ["AI", "Twilio", "Python", "API"], description: "Deployed an AI voice receptionist handling 200+ calls/day for appointment booking, rescheduling, and patient FAQs.", image: "/assets/portfolio-ai-receptionist.webp" },
-  { title: "E-Commerce ETL Pipeline", category: "Data", tech: ["Python", "SnapLogic", "AWS S3", "PostgreSQL"], description: "End-to-end ETL pipeline pulling data from 5 e-commerce platforms into a centralised data warehouse for unified reporting.", image: "/assets/portfolio-etl-pipeline.webp" },
-  { title: "Cloud Migration to Azure", category: "Cloud", tech: ["Azure", "Data Factory", "Synapse", "SQL"], description: "Migrated a legacy on-premise data warehouse to Azure, reducing infrastructure costs by 60% and improving query performance 3x.", image: "/assets/portfolio-cloud-azure.webp" },
-  { title: "Marketing AI Agent", category: "AI", tech: ["AI", "GPT", "Zapier", "Meta Ads"], description: "Developed an AI marketing agent that auto-generates ad copy, monitors campaign performance, and optimises budgets daily.", image: "/assets/portfolio-marketing-ai.webp" },
-  { title: "Web Crawler & Price Intelligence", category: "Data", tech: ["Python", "Scrapy", "PostgreSQL", "Google Sheets"], description: "Built a competitor price monitoring crawler tracking 50,000+ SKUs daily, feeding live data into Google Sheets for the sales team.", image: "/assets/portfolio-price-crawler.webp" },
-  { title: "AWS Data Lake Architecture", category: "Cloud", tech: ["AWS", "Glue", "Athena", "S3", "Lambda"], description: "Designed and deployed a serverless data lake on AWS processing 500GB of raw data daily with automated cataloguing.", image: "/assets/portfolio-aws-datalake.webp" },
-  { title: "SnapLogic ERP Integration", category: "Cloud", tech: ["SnapLogic", "SAP", "REST API", "SQL"], description: "Connected a client's SAP ERP to 8 downstream systems via SnapLogic, eliminating manual data entry and syncing 15k records/hour.", image: "/assets/portfolio-snaplogic-erp.webp" },
-  { title: "Automated Financial Reporting", category: "Data", tech: ["Python", "Power BI", "Excel", "SharePoint"], description: "Replaced a 3-hour manual weekly report with a fully automated pipeline delivering board-ready financials every Monday at 8am.", image: "/assets/portfolio-financial-reporting.webp" },
-  { title: "Amazon PPC Campaign for D2C Brand", category: "Marketing", tech: ["Amazon Ads", "ACoS", "Keyword Research", "DSP"], description: "Managed Sponsored Products & Brands campaigns for a D2C seller, reducing ACoS from 42% to 18% and increasing sales by 3.2× in 4 months.", image: "/assets/portfolio-amazon-ppc.webp" },
-  { title: "B2C SEO & Content Strategy", category: "Marketing", tech: ["SEO", "Content Marketing", "Schema", "Analytics"], description: "Executed end-to-end SEO strategy for an online retailer — grew organic traffic by 280% and first-page rankings from 12 to 85 keywords in 6 months.", image: "/assets/portfolio-seo-campaign.webp" },
-  { title: "E-Commerce Multi-Channel Marketing", category: "Marketing", tech: ["Google Shopping", "Meta Ads", "Klaviyo", "Retargeting"], description: "Built a full-funnel marketing system for a Shopify store — Google Shopping, retargeting, and abandoned cart flows driving 4.5× ROAS and 55% revenue growth.", image: "/assets/portfolio-ecommerce-marketing.webp" },
-  { title: "Quick Commerce Brand Launch", category: "Marketing", tech: ["Blinkit", "Zepto", "Hyperlocal Ads", "Swiggy Instamart"], description: "Launched an FMCG brand across Blinkit, Zepto & Swiggy Instamart with hyperlocal ad campaigns, achieving 12,000+ orders in the first 60 days.", image: "/assets/portfolio-quick-commerce.webp" },
-];
+import { casesList } from "@/lib/portfolio";
+
+const projects = casesList.map((c) => ({
+  slug: c.slug,
+  title: c.title,
+  category: c.category,
+  tech: c.tech,
+  description: c.excerpt,
+  image: c.image,
+}));
 
 export default function PortfolioContent() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -105,7 +98,7 @@ export default function PortfolioContent() {
                     ))}
                   </div>
                   <Button asChild size="sm" className="w-full bg-gradient-neon text-white hover:opacity-90 rounded-xl">
-                    <Link href="/contact">Request Similar Work <ExternalLink className="ml-2 w-3 h-3" /></Link>
+                    <Link href={`/portfolio/${project.slug}`}>View Case Study <ExternalLink className="ml-2 w-3 h-3" /></Link>
                   </Button>
                 </div>
               </motion.div>
