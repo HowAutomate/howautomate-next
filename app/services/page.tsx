@@ -18,6 +18,7 @@ const servicesSchema = {
     { "@type": "ListItem", position: 7, name: "Coaching Institute Automation", url: "https://howautomate.com/services/coaching-automation" },
     { "@type": "ListItem", position: 8, name: "CA Firm Automation", url: "https://howautomate.com/services/ca-firm-automation" },
     { "@type": "ListItem", position: 9, name: "E-Commerce Automation", url: "https://howautomate.com/services/ecommerce-automation" },
+    { "@type": "ListItem", position: 10, name: "WhatsApp Business Automation", url: "https://howautomate.com/services/whatsapp-automation" },
   ],
 };
 
