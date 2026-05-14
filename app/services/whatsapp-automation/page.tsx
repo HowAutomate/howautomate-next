@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import IndustryLanding from "@/components/IndustryLanding";
 
 export const metadata: Metadata = {
-  title: "WhatsApp Business Automation for Small Businesses | HowAutomate",
+  title: "WhatsApp Business Automation for Indian SMBs | HowAutomate",
   description: "Automate WhatsApp replies, lead follow-ups, appointment bookings, and customer communication using WhatsApp Business API and AI workflows.",
   alternates: { canonical: "https://howautomate.com/services/whatsapp-automation" },
   openGraph: { type: "website", title: "WhatsApp Business Automation | HowAutomate", url: "https://howautomate.com/services/whatsapp-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },

@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import HomeContent from "@/components/pages/HomeContent";
 
 export const metadata: Metadata = {
-  title: "HowAutomate — Data, AI & Automation for Modern Businesses",
-  description: "HowAutomate helps Indian and global SMBs automate workflows, build data pipelines, and deploy AI agents. Expert B2B automation agency. Book a free call today.",
+  title: "HowAutomate | Business Automation Agency India",
+  description: "HowAutomate helps Indian SMBs automate workflows, build data pipelines, and deploy AI agents. Expert B2B automation agency based in India. Book a free call today.",
   alternates: { canonical: "https://howautomate.com" },
   openGraph: {
     type: "website",
-    title: "HowAutomate — Data, AI & Automation for Modern Businesses",
+    title: "HowAutomate | Business Automation Agency India",
     description: "HowAutomate helps Indian and global SMBs automate workflows, build data pipelines, and deploy AI agents. Expert B2B automation agency. Book a free call today.",
     url: "https://howautomate.com",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],

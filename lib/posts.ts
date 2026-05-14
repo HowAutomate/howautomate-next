@@ -6,6 +6,8 @@ export interface Post {
   image: string;
   excerpt: string;
   body: string[];
+  serviceUrl?: string;
+  serviceLabel?: string;
 }
 
 export const posts: Record<string, Post> = {
@@ -286,6 +288,8 @@ export const posts: Record<string, Post> = {
       "**Advanced strategies: DSP and remarketing.** Amazon DSP (Demand-Side Platform) allows you to reach audiences both on and off Amazon with display and video ads. Use DSP to retarget shoppers who viewed your products but didn't purchase, target competitor audiences, and build awareness with in-market audiences. DSP requires higher minimum budgets but delivers powerful full-funnel results.",
       "**How [HowAutomate](https://howautomate.com) helps with Amazon PPC.** We build and manage Amazon PPC campaigns for sellers and brands — from keyword research and campaign structure to bid optimisation and performance reporting. Our data-driven approach uses automated bid management, search term analysis, and custom dashboards to maximise your ROAS while minimising wasted ad spend.",
     ],
+    serviceUrl: "/services/ecommerce-automation",
+    serviceLabel: "E-Commerce Automation Services",
   },
   "b2c-seo-strategy-organic-sales": {
     title: "B2C SEO Strategy: How to Rank Higher and Drive Organic Sales",
@@ -318,6 +322,8 @@ export const posts: Record<string, Post> = {
       "**Product feed optimisation.** Your product feed powers Google Shopping, Facebook Dynamic Ads, Pinterest Shopping, and marketplace listings. Optimise product titles with search keywords. Use custom labels to segment products by margin, bestseller status, or promotion eligibility. Ensure prices, stock status, and shipping info update in real-time to avoid disapprovals and wasted spend.",
       "**How [HowAutomate](https://howautomate.com) helps e-commerce businesses.** We build complete e-commerce marketing systems: product feed automation, Google Shopping campaign management, retargeting setup, abandoned cart flows, email marketing automation, and performance dashboards. Our clients typically see 40–60% revenue growth within 6 months of engagement.",
     ],
+    serviceUrl: "/services/ecommerce-automation",
+    serviceLabel: "E-Commerce Automation Services",
   },
   "quick-commerce-marketing-guide": {
     title: "Quick Commerce Marketing: How to Win in the 10-Minute Delivery Economy",
@@ -420,6 +426,8 @@ export const posts: Record<string, Post> = {
       "**Real client results.** A D2C beauty brand we worked with replaced their three-person WhatsApp support team with an AI agent handling 92% of conversations end-to-end, cutting response time from 4 hours to 8 seconds and saving ₹14 lakh ($17,000) per year. A multi-location dental clinic chain automated appointment booking and reminders, reducing no-shows by 68% and freeing two full-time receptionists for higher-value work.",
       "**Want this built for your business?** At [HowAutomate](https://howautomate.com), we build production-grade WhatsApp AI agents end-to-end — API setup, AI brain, system integrations, message templates, and ongoing optimisation. Whether you run a clinic, e-commerce store, coaching business, or service company, we'll have your bot live within 14 days. [Book a free 30-minute strategy call](https://calendly.com/hello-howautomate/30min) or explore our [AI automation services](/services).",
     ],
+    serviceUrl: "/services/whatsapp-automation",
+    serviceLabel: "WhatsApp Business Automation",
   },
   "voice-ai-agents-outbound-sales": {
     title: "Voice AI Agents for Outbound Sales: The New SDR Stack in 2026",
@@ -456,6 +464,8 @@ export const posts: Record<string, Post> = {
       "**Beyond lead follow-up: automating the full lifecycle.** Real estate automation goes beyond initial inquiry handling. Post-site-visit surveys sent automatically to gather feedback. Legal document checklist sent automatically when a lead moves to negotiation stage. Payment milestone reminders for buyers who've booked. Loan process guidance sent automatically after booking — connecting buyers to finance partners. Each of these runs without agent involvement, delivering a professional experience that builds trust.",
       "**Getting started.** The simplest starting point is a WhatsApp Business API integration that auto-responds to every new inquiry with property details. This single automation recovers an estimated 15–20% of leads that would otherwise be lost to slow response times. From there, the CRM pipeline and follow-up sequences add successive layers of automation. At [HowAutomate](https://howautomate.com), we build complete real estate lead automation systems — from WhatsApp integration to full CRM pipeline. [Book a free demo](https://howautomate.com/contact) and we'll show you exactly what's possible for your agency.",
     ],
+    serviceUrl: "/services/real-estate-automation",
+    serviceLabel: "Real Estate Automation Services",
   },
   "ca-firm-automation-guide": {
     title: "CA Firm Automation: How Chartered Accountants Save 20 Hours a Week",
@@ -474,6 +484,8 @@ export const posts: Record<string, Post> = {
       "**Compliance calendar automation.** Build a single automated compliance calendar that covers every due date for every client — ITR, GST, TDS, audit, ROC. The system automatically generates the upcoming week's task list every Monday morning, assigns tasks to team members, and sends reminders as deadlines approach. Partners get a weekly summary of what's due, what's done, and what's at risk — without manually maintaining any tracker.",
       "**Implementation path for CA firms.** Start with the highest-ROI automation first: client document collection reminders (saves 5–8 hours/week instantly). Add GST reminder workflows in the second month. Automate client onboarding in the third month. By month four, your firm is running on a system that handles 60% of routine communication automatically. At [HowAutomate](https://howautomate.com), we specialise in CA firm automation — from WhatsApp reminders to full compliance calendar workflows. [Talk to us](https://howautomate.com/contact) about your firm's specific needs.",
     ],
+    serviceUrl: "/services/ca-firm-automation",
+    serviceLabel: "CA Firm Automation Services",
   },
   "linkedin-b2b-lead-automation": {
     title: "LinkedIn B2B Lead Automation: How to Fill Your Pipeline on Autopilot",

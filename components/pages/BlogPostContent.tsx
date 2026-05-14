@@ -107,6 +107,17 @@ export default function BlogPostContent({ post, slug }: { post: Post; slug: stri
           })}
         </div>
 
+        {post.serviceUrl && (
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            className="mt-10 flex items-center justify-between gap-4 rounded-xl border border-primary/30 bg-primary/5 px-6 py-4"
+          >
+            <p className="text-sm text-foreground/80">Want this done for your business? See how we implement it end-to-end.</p>
+            <Link href={post.serviceUrl} className="flex-shrink-0 text-sm font-semibold text-primary hover:underline underline-offset-4 flex items-center gap-1">
+              {post.serviceLabel} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        )}
+
         {postFaqs[slug] && (
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-12">
             <h2 className="text-2xl font-bold text-foreground mb-5">Frequently Asked Questions</h2>

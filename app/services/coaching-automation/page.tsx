@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import IndustryLanding from "@/components/IndustryLanding";
 
 export const metadata: Metadata = {
-  title: "Coaching Institute Automation — Admissions & Operations | HowAutomate",
+  title: "Coaching Institute Automation India — Admissions & Ops | HowAutomate",
   description: "Automate student admissions, fee reminders, attendance tracking, and parent communication for coaching institutes and training centres.",
   alternates: { canonical: "https://howautomate.com/services/coaching-automation" },
   openGraph: { type: "website", title: "Coaching Institute Automation | HowAutomate", url: "https://howautomate.com/services/coaching-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },

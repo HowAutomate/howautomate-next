@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import IndustryLanding from "@/components/IndustryLanding";
 
 export const metadata: Metadata = {
-  title: "Clinic Automation for Dental & Medical Practices | HowAutomate",
+  title: "Clinic Automation for Medical Practices India | HowAutomate",
   description: "Automate appointment booking, patient follow-ups, and clinic operations. AI receptionist, CRM integration, and workflow automation for healthcare.",
   alternates: { canonical: "https://howautomate.com/services/clinic-automation" },
   openGraph: { type: "website", title: "Clinic Automation | HowAutomate", url: "https://howautomate.com/services/clinic-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },

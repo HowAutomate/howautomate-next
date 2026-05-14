@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import IndustryLanding from "@/components/IndustryLanding";
 
 export const metadata: Metadata = {
-  title: "CA Firm Automation — Compliance, Reporting & Workflow | HowAutomate",
+  title: "CA Firm Automation India — GST, Compliance & Workflow | HowAutomate",
   description: "Automate GST filing prep, client document collection, financial reporting, and workflow management for CA and accounting firms.",
   alternates: { canonical: "https://howautomate.com/services/ca-firm-automation" },
   openGraph: { type: "website", title: "CA Firm Automation | HowAutomate", url: "https://howautomate.com/services/ca-firm-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },

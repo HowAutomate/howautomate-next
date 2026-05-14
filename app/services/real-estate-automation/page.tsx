@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import IndustryLanding from "@/components/IndustryLanding";
 
 export const metadata: Metadata = {
-  title: "Real Estate Automation — CRM, Leads & Workflow | HowAutomate",
+  title: "Real Estate Lead Automation India — CRM & Follow-Up | HowAutomate",
   description: "Automate lead follow-up, property listings, CRM updates, and client communication for real estate agencies. Save 20+ hours a week.",
   alternates: { canonical: "https://howautomate.com/services/real-estate-automation" },
   openGraph: { type: "website", title: "Real Estate Automation | HowAutomate", url: "https://howautomate.com/services/real-estate-automation", images: [{ url: "/og-image.jpg", width: 1200, height: 630 }] },
