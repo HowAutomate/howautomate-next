@@ -23,85 +23,66 @@ jobs:
         with:
           node-version: '20'
 
-      # ── 1. Uptime & response times ──────────────────────────────────────────
+      # ── 1. Uptime ─────────────────────────────────────────────────────────────
       - name: Uptime checks
         run: |
           DATE=$(date +%Y-%m-%d)
-          {
-            echo "# HowAutomate Weekly SEO Report — $DATE"
-            echo ""
-            echo "## 1. Uptime & Response Times"
-            echo ""
-            echo "| Page | Status | TTFB | Result |"
-            echo "|---|---|---|---|"
-          } > report.md
+          echo "# HowAutomate Weekly SEO Report — $DATE" > report.md
+          echo "" >> report.md
+          echo "## 1. Uptime & Response Times" >> report.md
+          echo "" >> report.md
+          echo "| Page | Status | TTFB |" >> report.md
+          echo "|---|---|---|" >> report.md
 
-          PAGES=(
-            "/"
-            "/services/whatsapp-automation"
-            "/services/ca-firm-automation"
-            "/services/real-estate-automation"
-            "/services/clinic-automation"
-            "/services/ecommerce-automation"
-            "/services/coaching-automation"
-            "/blog"
-            "/about"
-            "/contact"
-            "/sitemap.xml"
-          )
-
-          for page in "${PAGES[@]}"; do
-            url="https://howautomate.com$page"
-            read -r status ttfb < <(curl -o /dev/null -s -w "%{http_code} %{time_starttransfer}" --max-time 15 "$url")
-            flag="✅ OK"
-            if [ "$status" != "200" ]; then flag="🔴 HTTP $status"; fi
-            if (( $(echo "$ttfb > 0.8" | bc -l) )); then flag="🟡 SLOW (${ttfb}s)"; fi
-            echo "| \`$page\` | $status | ${ttfb}s | $flag |" >> report.md
+          for page in "/" "/services/whatsapp-automation" "/services/ca-firm-automation" \
+                      "/services/real-estate-automation" "/services/clinic-automation" \
+                      "/services/ecommerce-automation" "/services/coaching-automation" \
+                      "/blog" "/about" "/contact" "/sitemap.xml"; do
+            url="https://howautomate.com${page}"
+            result=$(curl -o /dev/null -s -w "%{http_code} %{time_starttransfer}" --max-time 15 "$url" || echo "ERR 0")
+            status=$(echo "$result" | awk '{print $1}')
+            ttfb=$(echo "$result" | awk '{print $2}')
+            if [ "$status" = "200" ]; then
+              flag="✅"
+            else
+              flag="🔴 $status"
+            fi
+            echo "| \`${page}\` | $flag | ${ttfb}s |" >> report.md
           done
 
-      # ── 2. PageSpeed Insights ───────────────────────────────────────────────
+      # ── 2. PageSpeed ─────────────────────────────────────────────────────────
       - name: PageSpeed Insights
         run: |
-          {
-            echo ""
-            echo "## 2. PageSpeed Insights (Mobile)"
-            echo ""
-          } >> report.md
+          echo "" >> report.md
+          echo "## 2. PageSpeed Insights (Mobile)" >> report.md
+          echo "" >> report.md
 
           HTTP_CODE=$(curl -s -o psi.json -w "%{http_code}" \
-            "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://howautomate.com&strategy=mobile")
+            "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://howautomate.com&strategy=mobile" || echo "000")
 
           if [ "$HTTP_CODE" = "429" ]; then
-            echo "> ⚠️ Daily API quota exceeded. Check manually: https://pagespeed.web.dev/?url=howautomate.com" >> report.md
+            echo "> ⚠️ API quota exceeded. Check manually: https://pagespeed.web.dev/?url=howautomate.com" >> report.md
           elif [ "$HTTP_CODE" = "200" ]; then
-            node .github/scripts/parse-psi.js >> report.md
+            node .github/scripts/parse-psi.js >> report.md || echo "> ⚠️ Could not parse PageSpeed response" >> report.md
           else
             echo "> ⚠️ PageSpeed API returned HTTP $HTTP_CODE" >> report.md
           fi
 
-      # ── 3. Sitemap health ───────────────────────────────────────────────────
+      # ── 3. Sitemap ────────────────────────────────────────────────────────────
       - name: Sitemap audit
         run: |
-          {
-            echo ""
-            echo "## 3. Sitemap Health"
-            echo ""
-          } >> report.md
+          echo "" >> report.md
+          echo "## 3. Sitemap Health" >> report.md
+          echo "" >> report.md
 
-          curl -sf "https://howautomate.com/sitemap.xml" -o sitemap_live.xml
-
-          if [ $? -ne 0 ]; then
-            echo "> ❌ Could not fetch sitemap.xml" >> report.md
-          else
+          if curl -sf "https://howautomate.com/sitemap.xml" -o sitemap_live.xml; then
             total=$(grep -c "<loc>" sitemap_live.xml || echo 0)
             blog=$(grep -c "/blog/" sitemap_live.xml || echo 0)
             portfolio=$(grep -c "/portfolio/" sitemap_live.xml || echo 0)
             services=$(grep -oP '/services/[a-z-]+' sitemap_live.xml | grep -v "^/services$" | sort -u | wc -l || echo 0)
 
-            {
-              echo "| Section | Count | Expected | Status |"
-              echo "|---|---|---|---|"
-            } >> report.md
+            echo "| Section | Count | Expected | Status |" >> report.md
+            echo "|---|---|---|---|" >> report.md
 
             [ "$total" -ge 55 ]     && ts="✅" || ts="⚠️"
             [ "$blog" -ge 33 ]      && bs="✅" || bs="⚠️"
@@ -112,32 +93,32 @@ jobs:
             echo "| Blog posts    | $blog      | 33+  | $bs |" >> report.md
             echo "| Portfolio     | $portfolio | 16+  | $ps |" >> report.md
             echo "| Service pages | $services  | 6    | $ss |" >> report.md
+          else
+            echo "> ❌ Could not fetch sitemap.xml" >> report.md
           fi
 
-      # ── 4. Codebase audit + auto-fix ────────────────────────────────────────
+      # ── 4. Codebase audit + auto-fix ─────────────────────────────────────────
       - name: Codebase audit and auto-fix
         id: fixes
         run: |
-          {
-            echo ""
-            echo "## 4. Codebase SEO Audit"
-            echo ""
-          } >> report.md
+          echo "" >> report.md
+          echo "## 4. Codebase SEO Audit" >> report.md
+          echo "" >> report.md
 
           BRANCH="weekly-seo-$(date +%Y-%m-%d)"
           git checkout -b "$BRANCH"
           CHANGES=0
 
-          # Check for stale public/sitemap.xml
+          # Stale public/sitemap.xml
           if [ -f "public/sitemap.xml" ]; then
-            echo "- 🚨 **CRITICAL** \`public/sitemap.xml\` found — removing" >> report.md
+            echo "- 🚨 \`public/sitemap.xml\` found — removing (overrides dynamic sitemap)" >> report.md
             git rm public/sitemap.xml
             CHANGES=$((CHANGES + 1))
           else
             echo "- ✅ No stale \`public/sitemap.xml\`" >> report.md
           fi
 
-          # Check each service page
+          # Service pages
           echo "" >> report.md
           echo "**Service pages:**" >> report.md
           echo "" >> report.md
@@ -146,26 +127,26 @@ jobs:
             [ -f "$f" ] || continue
             service=$(echo "$f" | sed 's|app/services/||;s|/page.tsx||')
             issues=""
-            grep -q 'description:'        "$f" || issues="$issues missing-meta-description,"
-            grep -q 'canonical'           "$f" || issues="$issues missing-canonical,"
-            grep -q 'application/ld+json' "$f" || issues="$issues missing-schema,"
+            grep -q 'description:'        "$f" || issues="${issues}missing-meta-description "
+            grep -q 'canonical'           "$f" || issues="${issues}missing-canonical "
+            grep -q 'application/ld+json' "$f" || issues="${issues}missing-schema "
 
             if [ -z "$issues" ]; then
               echo "- ✅ \`$service\`: all checks pass" >> report.md
             else
-              echo "- ⚠️ \`$service\`: ${issues%,}" >> report.md
+              echo "- ⚠️ \`$service\`: $issues" >> report.md
             fi
           done
 
           # Blog post count
-          post_count=$(grep -c '^  "[a-z][a-z0-9-]*": {' lib/posts.ts 2>/dev/null || echo "unknown")
+          post_count=$(grep -c '^  "[a-z][a-z0-9-]*": {' lib/posts.ts 2>/dev/null || echo 0)
           echo "" >> report.md
           echo "- 📝 Blog posts in \`lib/posts.ts\`: **$post_count**" >> report.md
 
           echo "CHANGES=$CHANGES" >> "$GITHUB_OUTPUT"
           echo "BRANCH=$BRANCH"   >> "$GITHUB_OUTPUT"
 
-      # ── 5. Open PR if fixes found ────────────────────────────────────────────
+      # ── 5. PR if fixes exist ──────────────────────────────────────────────────
       - name: Commit and open PR
         if: steps.fixes.outputs.CHANGES != '0'
         env:
@@ -176,39 +157,30 @@ jobs:
           git add -A
           git commit -m "Weekly SEO auto-fix — $(date +%Y-%m-%d)"
           git push origin "${{ steps.fixes.outputs.BRANCH }}"
-          REPORT=$(cat report.md)
           gh pr create \
             --title "Weekly SEO fixes — $(date +%Y-%m-%d)" \
-            --body "$REPORT
-
----
-*Auto-generated by Weekly SEO Audit workflow*" \
+            --body "$(cat report.md)" \
             --base master \
             --head "${{ steps.fixes.outputs.BRANCH }}"
 
-      # ── 6. Create weekly GitHub Issue ────────────────────────────────────────
+      # ── 6. Weekly Issue ───────────────────────────────────────────────────────
       - name: Ensure weekly-seo label exists
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh label create "weekly-seo" --color "0075ca" --description "Weekly SEO audit report" 2>/dev/null || true
+        run: gh label create "weekly-seo" --color "0075ca" --description "Weekly SEO audit" 2>/dev/null || true
 
       - name: Close previous audit issues
         uses: actions/github-script@v7
         with:
           script: |
             const issues = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: 'weekly-seo',
-              state: 'open'
+              owner: context.repo.owner, repo: context.repo.repo,
+              labels: 'weekly-seo', state: 'open'
             });
-            for (const issue of issues.data) {
+            for (const i of issues.data) {
               await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                state: 'closed'
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: i.number, state: 'closed'
               });
             }
 
@@ -219,9 +191,8 @@ jobs:
             const fs = require('fs');
             const report = fs.readFileSync('report.md', 'utf8');
             await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo:  context.repo.repo,
+              owner: context.repo.owner, repo: context.repo.repo,
               title: '📊 Weekly SEO Audit — ' + new Date().toISOString().split('T')[0],
-              body:  report + '\n\n---\n*Auto-generated by [Weekly SEO Audit](.github/workflows/weekly-seo-audit.yml)*',
+              body: report + '\n\n---\n*Auto-generated by [Weekly SEO Audit](.github/workflows/weekly-seo-audit.yml)*',
               labels: ['weekly-seo']
             });
