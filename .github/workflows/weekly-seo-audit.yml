@@ -1,0 +1,254 @@
+name: Weekly SEO Audit
+
+on:
+  schedule:
+    - cron: '30 3 * * 0'  # Every Sunday 9:00 AM IST (3:30 AM UTC)
+  workflow_dispatch:       # Manual trigger from GitHub UI
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ─────────────────────────────────────────────
+      # STEP 1: Uptime & response time checks
+      # ─────────────────────────────────────────────
+      - name: Uptime checks
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          echo "# HowAutomate Weekly SEO Report — $DATE" > report.md
+          echo "" >> report.md
+          echo "## 1. Uptime & Response Times" >> report.md
+          echo "" >> report.md
+          echo "| Page | Status | TTFB | Result |" >> report.md
+          echo "|---|---|---|---|" >> report.md
+
+          PAGES=(
+            "/"
+            "/services/whatsapp-automation"
+            "/services/ca-firm-automation"
+            "/services/real-estate-automation"
+            "/services/clinic-automation"
+            "/services/ecommerce-automation"
+            "/services/coaching-automation"
+            "/blog"
+            "/about"
+            "/contact"
+            "/sitemap.xml"
+          )
+
+          for page in "${PAGES[@]}"; do
+            url="https://howautomate.com$page"
+            read status ttfb < <(curl -o /dev/null -s -w "%{http_code} %{time_starttransfer}" --max-time 15 "$url")
+
+            flag="✅ OK"
+            if [ "$status" != "200" ]; then flag="🔴 HTTP $status"; fi
+            if (( $(echo "$ttfb > 0.8" | bc -l) )); then flag="🟡 SLOW (${ttfb}s)"; fi
+
+            echo "| \`$page\` | $status | ${ttfb}s | $flag |" >> report.md
+          done
+
+      # ─────────────────────────────────────────────
+      # STEP 2: PageSpeed Insights (mobile)
+      # ─────────────────────────────────────────────
+      - name: PageSpeed Insights
+        run: |
+          echo "" >> report.md
+          echo "## 2. PageSpeed Insights (Mobile)" >> report.md
+          echo "" >> report.md
+
+          HTTP_CODE=$(curl -s -o psi.json -w "%{http_code}" \
+            "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://howautomate.com&strategy=mobile")
+
+          if [ "$HTTP_CODE" = "429" ]; then
+            echo "> ⚠️ Daily API quota exceeded. Check manually: https://pagespeed.web.dev/?url=howautomate.com" >> report.md
+          elif [ "$HTTP_CODE" = "200" ]; then
+            node << 'EOF' >> report.md
+const d = require('./psi.json');
+const cats = d.lighthouseResult?.categories || {};
+const audits = d.lighthouseResult?.audits || {};
+const perf = Math.round((cats.performance?.score || 0) * 100);
+const rating = s => s >= 0.9 ? '🟢 Good' : s >= 0.5 ? '🟡 Needs Work' : '🔴 Poor';
+
+console.log('| Metric | Value | Rating |');
+console.log('|---|---|---|');
+console.log(`| Performance Score | **${perf}/100** | ${rating(cats.performance?.score || 0)} |`);
+
+['largest-contentful-paint','cumulative-layout-shift','first-contentful-paint','total-blocking-time'].forEach(k => {
+  const a = audits[k];
+  if (a) console.log(`| ${a.title} | ${a.displayValue} | ${rating(a.score || 0)} |`);
+});
+
+const opps = Object.values(audits)
+  .filter(a => a.details?.type === 'opportunity' && a.score < 0.9)
+  .sort((a, b) => (b.details?.overallSavingsMs || 0) - (a.details?.overallSavingsMs || 0))
+  .slice(0, 3);
+
+if (opps.length > 0) {
+  console.log('');
+  console.log('**Top Opportunities:**');
+  opps.forEach(o => console.log(`- ${o.title}: ~${Math.round(o.details?.overallSavingsMs || 0)}ms savings`));
+}
+EOF
+          else
+            echo "> ⚠️ PageSpeed API returned HTTP $HTTP_CODE" >> report.md
+          fi
+
+      # ─────────────────────────────────────────────
+      # STEP 3: Sitemap health
+      # ─────────────────────────────────────────────
+      - name: Sitemap audit
+        run: |
+          echo "" >> report.md
+          echo "## 3. Sitemap Health" >> report.md
+          echo "" >> report.md
+
+          curl -sf "https://howautomate.com/sitemap.xml" -o sitemap_live.xml
+
+          if [ $? -ne 0 ]; then
+            echo "> ❌ Could not fetch sitemap.xml" >> report.md
+          else
+            total=$(grep -c "<loc>" sitemap_live.xml || echo 0)
+            blog=$(grep -c "/blog/" sitemap_live.xml || echo 0)
+            portfolio=$(grep -c "/portfolio/" sitemap_live.xml || echo 0)
+            services=$(grep -oP '/services/[a-z-]+' sitemap_live.xml | grep -v "^/services$" | sort -u | wc -l || echo 0)
+
+            echo "| Section | Count | Expected | Status |" >> report.md
+            echo "|---|---|---|---|" >> report.md
+            [ "$total" -ge 55 ]     && ts="✅" || ts="⚠️"; echo "| Total URLs    | $total     | 55+  | $ts |" >> report.md
+            [ "$blog" -ge 33 ]      && bs="✅" || bs="⚠️"; echo "| Blog posts    | $blog      | 33+  | $bs |" >> report.md
+            [ "$portfolio" -ge 16 ] && ps="✅" || ps="⚠️"; echo "| Portfolio     | $portfolio | 16+  | $ps |" >> report.md
+            [ "$services" -ge 6 ]   && ss="✅" || ss="⚠️"; echo "| Service pages | $services  | 6    | $ss |" >> report.md
+          fi
+
+      # ─────────────────────────────────────────────
+      # STEP 4: Codebase audit + auto-fix
+      # ─────────────────────────────────────────────
+      - name: Codebase audit and auto-fix
+        id: fixes
+        run: |
+          echo "" >> report.md
+          echo "## 4. Codebase SEO Audit" >> report.md
+          echo "" >> report.md
+
+          BRANCH="weekly-seo-$(date +%Y-%m-%d)"
+          git checkout -b "$BRANCH"
+          CHANGES=0
+
+          # ── Check for stale public/sitemap.xml ──
+          if [ -f "public/sitemap.xml" ]; then
+            echo "- 🚨 **CRITICAL** \`public/sitemap.xml\` found — removing (it overrides the dynamic sitemap)" >> report.md
+            git rm public/sitemap.xml
+            CHANGES=$((CHANGES + 1))
+          else
+            echo "- ✅ No stale \`public/sitemap.xml\`" >> report.md
+          fi
+
+          # ── Check each service page ──
+          echo "" >> report.md
+          echo "**Service pages:**" >> report.md
+          echo "" >> report.md
+
+          for f in app/services/*/page.tsx; do
+            [ -f "$f" ] || continue
+            service=$(echo "$f" | sed 's|app/services/||;s|/page.tsx||')
+            ok=true
+            issues=""
+
+            grep -q 'description:' "$f"          || { issues="$issues missing meta description,"; ok=false; }
+            grep -q 'canonical'    "$f"          || { issues="$issues missing canonical,"; ok=false; }
+            grep -q 'application/ld+json' "$f"   || { issues="$issues missing schema markup,"; ok=false; }
+
+            if $ok; then
+              echo "- ✅ \`$service\`: all checks pass" >> report.md
+            else
+              echo "- ⚠️ \`$service\`: ${issues%,}" >> report.md
+            fi
+          done
+
+          # ── Blog post count ──
+          post_count=$(grep -c '^  "[a-z][a-z0-9-]*": {' lib/posts.ts 2>/dev/null || echo "unknown")
+          echo "" >> report.md
+          echo "- 📝 Blog posts in \`lib/posts.ts\`: **$post_count**" >> report.md
+
+          echo "CHANGES=$CHANGES" >> "$GITHUB_OUTPUT"
+          echo "BRANCH=$BRANCH"   >> "$GITHUB_OUTPUT"
+
+      # ─────────────────────────────────────────────
+      # STEP 5: Push fixes as a PR (only if changes)
+      # ─────────────────────────────────────────────
+      - name: Commit and open PR
+        if: steps.fixes.outputs.CHANGES != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Weekly SEO auto-fix — $(date +%Y-%m-%d)"
+          git push origin "${{ steps.fixes.outputs.BRANCH }}"
+
+          gh pr create \
+            --title "Weekly SEO fixes — $(date +%Y-%m-%d)" \
+            --body "$(cat report.md)
+
+---
+*Auto-generated by [Weekly SEO Audit](.github/workflows/weekly-seo-audit.yml)*" \
+            --base master \
+            --head "${{ steps.fixes.outputs.BRANCH }}"
+
+      # ─────────────────────────────────────────────
+      # STEP 6: Create weekly issue with full report
+      # ─────────────────────────────────────────────
+      - name: Ensure weekly-seo label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "weekly-seo" --color "0075ca" --description "Weekly SEO audit report" 2>/dev/null || true
+
+      - name: Close previous audit issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'weekly-seo',
+              state: 'open'
+            });
+            for (const issue of issues.data) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+            }
+
+      - name: Create weekly audit issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs   = require('fs');
+            const report = fs.readFileSync('report.md', 'utf8');
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              title: `📊 Weekly SEO Audit — ${new Date().toISOString().split('T')[0]}`,
+              body:  report + '\n\n---\n*Auto-generated by [Weekly SEO Audit](.github/workflows/weekly-seo-audit.yml)*',
+              labels: ['weekly-seo']
+            });
