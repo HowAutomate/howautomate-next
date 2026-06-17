@@ -81,6 +81,7 @@ export default function Footer() {
                 { label: "About Us", href: "/about" },
                 { label: "Portfolio", href: "/portfolio" },
                 { label: "Blog", href: "/blog" },
+                { label: "AI Automation in Jaipur", href: "/ai-automation-agency-jaipur" },
                 { label: "Contact", href: "/contact" },
               ].map((item) => (
                 <li key={item.label}>
@@ -104,9 +105,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="w-4 h-4 flex-shrink-0" />Remote — Serving Globally
-                </span>
+                <Link href="/ai-automation-agency-jaipur" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <MapPin className="w-4 h-4 flex-shrink-0" />Jaipur, India — Serving Globally
+                </Link>
               </li>
             </ul>
             <div className="mt-5">

@@ -26,7 +26,14 @@ const organizationSchema = {
   telephone: "+91-96020-94213",
   foundingDate: "2023-01-01",
   areaServed: "Worldwide",
-  address: { "@type": "PostalAddress", addressCountry: "IN" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Plot No. 06, Govind Vihar-A, Nangal Jaisa Bohara, Jhotwara",
+    addressLocality: "Jaipur",
+    addressRegion: "Rajasthan",
+    postalCode: "302012",
+    addressCountry: "IN",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+91-96020-94213",
