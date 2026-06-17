@@ -84,18 +84,42 @@ jobs:
             echo "| Section | Count | Expected | Status |" >> report.md
             echo "|---|---|---|---|" >> report.md
 
-            [ "$total" -ge 55 ]     && ts="✅" || ts="⚠️"
-            [ "$blog" -ge 33 ]      && bs="✅" || bs="⚠️"
+            [ "$total" -ge 65 ]     && ts="✅" || ts="⚠️"
+            [ "$blog" -ge 38 ]      && bs="✅" || bs="⚠️"
             [ "$portfolio" -ge 16 ] && ps="✅" || ps="⚠️"
             [ "$services" -ge 6 ]   && ss="✅" || ss="⚠️"
 
-            echo "| Total URLs    | $total     | 55+  | $ts |" >> report.md
-            echo "| Blog posts    | $blog      | 33+  | $bs |" >> report.md
+            echo "| Total URLs    | $total     | 65+  | $ts |" >> report.md
+            echo "| Blog posts    | $blog      | 38+  | $bs |" >> report.md
             echo "| Portfolio     | $portfolio | 16+  | $ps |" >> report.md
             echo "| Service pages | $services  | 6    | $ss |" >> report.md
           else
             echo "> ❌ Could not fetch sitemap.xml" >> report.md
           fi
+
+      - name: IndexNow ping (Bing / Yandex)
+        run: |
+          echo "" >> report.md
+          echo "## 3b. IndexNow Submission" >> report.md
+          echo "" >> report.md
+          KEY="${INDEXNOW_KEY:-howautomateindexnow8f3c2b1a4d5e6f}"
+          if [ -f sitemap_live.xml ]; then
+            urls_json=$(grep -oP '(?<=<loc>)[^<]+' sitemap_live.xml | jq -R . | jq -s .)
+            count=$(echo "$urls_json" | jq 'length')
+            payload=$(jq -n --argjson urls "$urls_json" --arg key "$KEY" \
+              '{host:"howautomate.com", key:$key, keyLocation:("https://howautomate.com/"+$key+".txt"), urlList:$urls}')
+            code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+              -H "Content-Type: application/json; charset=utf-8" -d "$payload")
+            if [ "$code" = "200" ] || [ "$code" = "202" ]; then
+              echo "> ✅ Submitted **$count** URLs to IndexNow (HTTP $code) — Bing & Yandex notified." >> report.md
+            else
+              echo "> ⚠️ IndexNow returned HTTP $code for $count URLs." >> report.md
+            fi
+          else
+            echo "> ⚠️ Skipped — sitemap_live.xml not available." >> report.md
+          fi
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
 
       # ── 4. Codebase audit + auto-fix ─────────────────────────────────────────
       - name: Codebase audit and auto-fix
