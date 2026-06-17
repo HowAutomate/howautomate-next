@@ -22,6 +22,18 @@ License: https://creativecommons.org/licenses/by-nc/4.0/
 
 ## Blog Articles
 
+### Latest (June 2026)
+- [AI Chatbot for Your Website: Lead Capture & 24/7 Support for Indian Businesses](https://howautomate.com/blog/ai-chatbot-website-india)
+  > How LLM-powered website chatbots capture leads, qualify visitors, book appointments, and reply in Hindi or English 24/7 — costs, setup, and integrations for India.
+- [Restaurant & Cloud Kitchen Automation in India: Orders, Inventory & WhatsApp Ordering](https://howautomate.com/blog/restaurant-cloud-kitchen-automation-india)
+  > Direct WhatsApp ordering to cut Swiggy/Zomato commission, unified multi-channel order dashboards, recipe-level inventory control, and multi-brand cloud kitchen automation.
+- [Tally + AI: Automate Accounting, GST Reconciliation & Data Entry in India](https://howautomate.com/blog/tally-ai-accounting-automation-india)
+  > Connecting Tally to AI for automatic invoice capture, bank statement reconciliation, and GSTR-2B matching — costs, safety, and time saved for Indian businesses and CA firms.
+- [WhatsApp Abandoned Cart Recovery: Win Back D2C Sales on Autopilot](https://howautomate.com/blog/whatsapp-abandoned-cart-recovery)
+  > How D2C brands in India recover 15–25% of abandoned carts with automated WhatsApp flows — sequence design, the 24-hour rule, costs, and Shopify/WooCommerce integration.
+- [AEO & GEO: How to Get Your Business Cited by ChatGPT & Google AI Overviews](https://howautomate.com/blog/aeo-geo-ai-search-india)
+  > The 2026 playbook for Answer Engine and Generative Engine Optimisation — extractable passages, FAQ schema, AI crawler access, llms.txt, off-page authority, and measuring AI visibility.
+
 ### Data Engineering
 - [What is ETL? A Beginner's Guide to Data Pipelines](https://howautomate.com/blog/what-is-etl)
   > Extract, Transform, Load explained — how ETL pipelines work, ELT vs ETL, common pitfalls, and scaling strategies for growing data volumes.
