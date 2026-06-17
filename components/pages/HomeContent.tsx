@@ -53,6 +53,8 @@ const clients = [
   { src: '/assets/client-sukhija-sales.webp', name: 'Sukhija Sales'  },
   { src: '/assets/client-shree-shyam.webp',   name: 'Shree Shyam'   },
   { src: '/assets/client-gredflow.webp',       name: 'GredFlow'       },
+  { src: '/assets/client-apna-dental.webp',    name: 'Apna Dental'    },
+  { src: '/assets/client-utsavify.webp',       name: 'Utsavify'       },
 ]
 
 const tools = [
