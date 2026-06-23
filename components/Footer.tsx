@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Mail, Phone, MapPin } from "lucide-react";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
@@ -24,15 +21,13 @@ const SocialIcons = [
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
   return (
-    <footer className={`border-t border-border bg-card ${isHome ? "ha-footer-light" : ""}`}>
+    <footer className="border-t border-border bg-card">
       <div className="container mx-auto py-16 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img src="/assets/logo-transparent.webp" alt="HowAutomate Logo" width={200} height={80} loading="lazy" className="h-16 md:h-20 w-auto object-contain" style={isHome ? { filter: "brightness(0)" } : undefined} />
+              <img src="/assets/logo-transparent.webp" alt="HowAutomate Logo" width={200} height={80} loading="lazy" className="h-16 md:h-20 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Helping businesses automate smarter. We build data pipelines, AI agents, and cloud infrastructure that let your team focus on what matters.

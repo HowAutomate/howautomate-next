@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${newsreader.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${newsreader.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />

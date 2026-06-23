@@ -30,7 +30,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
   const pathname                = usePathname()
-  const isHome                  = pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -40,21 +39,19 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname])
 
-  // theme: light on the (light) homepage, dark elsewhere
-  const idleColor  = isHome ? 'rgba(22,24,16,0.6)'  : 'rgba(255,255,255,0.55)'
-  const hoverColor = isHome ? '#181A12'             : '#fff'
-  const hoverBg    = isHome ? 'rgba(22,24,16,0.05)' : 'rgba(255,255,255,0.06)'
-  const panelBg    = isHome ? 'rgba(255,255,255,0.98)' : 'rgba(15,10,30,0.98)'
-  const panelBorder= isHome ? '1px solid rgba(22,24,16,0.1)' : '1px solid rgba(255,255,255,0.1)'
+  // light theme site-wide
+  const idleColor  = 'rgba(22,24,16,0.6)'
+  const hoverColor = '#181A12'
+  const hoverBg    = 'rgba(22,24,16,0.05)'
+  const panelBg    = 'rgba(255,255,255,0.98)'
+  const panelBorder= '1px solid rgba(22,24,16,0.1)'
 
   const headerStyle: React.CSSProperties = {
     position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-    background: isHome
-      ? (scrolled ? 'rgba(249,248,244,0.92)' : 'rgba(249,248,244,0.78)')
-      : (scrolled ? 'rgba(7,4,15,0.92)' : 'rgba(7,4,15,0.7)'),
+    background: scrolled ? 'rgba(249,248,244,0.95)' : 'rgba(249,248,244,0.82)',
     backdropFilter: 'blur(24px)',
     WebkitBackdropFilter: 'blur(24px)',
-    borderBottom: isHome ? '1px solid rgba(22,24,16,0.08)' : '1px solid rgba(255,255,255,0.08)',
+    borderBottom: '1px solid rgba(22,24,16,0.08)',
     transition: 'background 0.3s ease',
   }
 
@@ -81,7 +78,7 @@ export default function Navbar() {
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
         >
-          <img src={logo.src} alt="HowAutomate" fetchPriority="high" width={logo.width} height={logo.height} style={{ height: 60, width: 'auto', display: 'block', filter: isHome ? 'brightness(0)' : 'none' }} />
+          <img src={logo.src} alt="HowAutomate" fetchPriority="high" width={logo.width} height={logo.height} style={{ height: 60, width: 'auto', display: 'block' }} />
         </Link>
 
         {/* desktop nav */}
@@ -109,7 +106,7 @@ export default function Navbar() {
                         onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                       >
                         <t.icon size={15} style={{ color: ACCENT }} />
-                        <span style={{ fontSize: 13, color: isHome ? 'rgba(22,24,16,0.75)' : 'rgba(255,255,255,0.75)', fontWeight: 500 }}>{t.label}</span>
+                        <span style={{ fontSize: 13, color: 'rgba(22,24,16,0.75)', fontWeight: 500 }}>{t.label}</span>
                       </a>
                     ))}
                   </div>

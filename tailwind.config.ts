@@ -70,9 +70,9 @@ export default {
         float: "float 4s ease-in-out infinite",
       },
       backgroundImage: {
-        "gradient-neon": "linear-gradient(135deg, hsl(var(--brand-blue, 245 85% 65%)), hsl(var(--brand-indigo, 235 75% 55%)))",
-        "gradient-brand": "linear-gradient(135deg, hsl(245 85% 65%), hsl(235 75% 55%))",
-        "gradient-hero": "linear-gradient(160deg, hsl(245 85% 65% / 0.06) 0%, hsl(235 75% 55% / 0.04) 100%)",
+        "gradient-neon": "linear-gradient(135deg, hsl(var(--brand-blue, 221 83% 53%)), hsl(var(--brand-indigo, 224 76% 48%)))",
+        "gradient-brand": "linear-gradient(135deg, hsl(221 83% 53%), hsl(224 76% 48%))",
+        "gradient-hero": "linear-gradient(160deg, hsl(221 83% 53% / 0.06) 0%, hsl(224 76% 48% / 0.04) 100%)",
       },
     },
   },
