@@ -136,11 +136,11 @@
    HOMEPAGE REBRAND — "Living Workflow", multi-colour (scoped .ha-home)
    ════════════════════════════════════════════════════════════ */
 .ha-home{
-  --bg:#0B0C0A;--bg2:#0F100D;--surface:#141512;--surface2:#1A1C17;
-  --line:rgba(244,247,240,.08);--line2:rgba(244,247,240,.16);
-  --tx:#F4F7F0;--muted:#8E948A;--faint:#585D52;
-  --accent:#B4F23D;--accent-2:#CDFF66;--accent-deep:#8FCC1E;--accent-rgb:180,242,61;--ink:#0C0E0D;
-  --m1:#B4F23D;--m2:#22D3EE;--m3:#FB923C;--m4:#C792EA;--m5:#FF6B9D;--m6:#34D399;
+  --bg:#F8F8F4;--bg2:#EFEFE9;--surface:#FFFFFF;--surface2:#F4F5F0;
+  --line:rgba(22,24,16,.10);--line2:rgba(22,24,16,.17);
+  --tx:#181A12;--muted:#585C4E;--faint:#93988A;
+  --accent:#2563EB;--accent-2:#3B82F6;--accent-deep:#1D4ED8;--accent-rgb:37,99,235;--ink:#FFFFFF;
+  --m1:#2563EB;--m2:#0EA5E9;--m3:#6366F1;--m4:#3B82F6;--m5:#0284C7;--m6:#1D4ED8;
   --d:var(--font-space),var(--font-inter),system-ui,sans-serif;
   --mo:var(--font-plexmono),ui-monospace,Menlo,monospace;
   --se:var(--font-newsreader),Georgia,serif;
@@ -305,3 +305,13 @@
 .ha-home .cta h2{font-size:clamp(1.9rem,4vw,2.8rem);max-width:620px;margin:0 auto 14px;position:relative}
 .ha-home .cta>div>p{color:var(--muted);max-width:430px;margin:0 auto 30px;position:relative}
 .ha-home .cta .hcta{justify-content:center}
+
+/* ── Homepage LIGHT-mode surface tweaks (override dark-assumed rgba) ── */
+.ha-home .chip,.ha-home .svtag,.ha-home .tag{background:rgba(22,24,16,.04)}
+.ha-home .tool .ti{background:rgba(22,24,16,.05)}
+.ha-home .btn-ghost{background:rgba(22,24,16,.04);border-color:var(--line2);color:var(--tx)}
+.ha-home .btn-ghost:hover{background:rgba(22,24,16,.08)}
+.ha-home .lcard{background:var(--surface2);border:1px solid var(--line)}
+.ha-home .lcard:hover{background:#fff;border-color:var(--line2);box-shadow:0 6px 20px -10px rgba(22,24,16,.18)}
+.ha-home .dwin .tl i{background:rgba(22,24,16,.18)}
+.ha-home .tile,.ha-home .svcard,.ha-home .ocard,.ha-home .pcard,.ha-home .tool,.ha-home .post,.ha-home .tcard,.ha-home .ind{box-shadow:0 1px 2px rgba(22,24,16,.04),0 10px 28px -18px rgba(22,24,16,.16)}
