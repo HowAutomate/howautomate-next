@@ -1,559 +1,257 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, BarChart3, Bot, Cloud, Megaphone, Star,
-  FileText, Heart, Clock, Sparkle, ExternalLink,
-  Phone, Search, Rocket, Zap, Database, Cpu,
+  ArrowRight, BarChart3, Bot, Workflow, Cloud, Star,
+  FileText, Sparkles, HeartPulse, Clock, ExternalLink,
+  Phone, Search, Rocket, Zap, Calculator, Building2,
+  ShoppingCart, GraduationCap, Truck, TrendingUp,
 } from 'lucide-react'
-import { Spotlight } from '@/components/ui/spotlight'
 import { postsList } from '@/lib/posts'
 
-/* ─── constants ─────────────────────────────────────────── */
-
-const BG = '#07040f'
-
-const GRID: React.CSSProperties = {
-  backgroundImage:
-    'linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)',
-  backgroundSize: '52px 52px',
-}
-
-/* ─── data ───────────────────────────────────────────────── */
-
-const stats = [
-  { value: '50+',  label: 'Projects Delivered'  },
-  { value: '2023', label: 'Founded'               },
-  { value: '3',    label: 'Countries Served'     },
-  { value: '100%', label: 'Client Satisfaction'  },
-]
-
+/* ─── data ─── */
 const services = [
-  { icon: BarChart3, title: 'Data & Analytics',    color: '#818cf8', glow: 'rgba(129,140,248,0.14)', desc: 'ETL pipelines, Power BI dashboards, automated reports and Google Sheets automation.',    link: '/services#data'      },
-  { icon: Bot,       title: 'AI & Automation',     color: '#fb923c', glow: 'rgba(251,146,60,0.14)',  desc: 'AI receptionists, marketing agents, workflow automation and custom API integrations.',  link: '/services#ai'        },
-  { icon: Cloud,     title: 'Cloud & Engineering', color: '#60a5fa', glow: 'rgba(96,165,250,0.14)',  desc: 'Azure, AWS, SnapLogic, database design, web crawlers and full-stack applications.',    link: '/services#cloud'     },
-  { icon: Megaphone, title: 'Digital Marketing',   color: '#34d399', glow: 'rgba(52,211,153,0.14)',  desc: 'Amazon PPC, B2C SEO, e-commerce and quick commerce strategies that drive real revenue.', link: '/services#marketing' },
-]
-
-const outcomes = [
-  { metric: '90%',  label: 'Report Time Saved',   desc: 'Replaced 3-hour manual reporting with a fully automated Monday pipeline.', tag: 'Financial Services' },
-  { metric: '3.2×', label: 'Sales via Amazon PPC', desc: 'ACoS from 42% → 18%, sales tripled in 4 months through Sponsored Products.', tag: 'D2C E-Commerce' },
-  { metric: '80%',  label: 'Calls Handled by AI', desc: 'AI receptionist handles 200+ inbound calls/day — booking, FAQ, CRM auto-updated.', tag: 'Healthcare' },
-]
-
-const testimonials = [
-  { quote: 'From Power BI dashboards to end-to-end automation, HowAutomate delivered beyond expectations. They transformed how we track and act on our data.', name: 'Ecometra Marketing Team', role: 'Marketing · Ecometra360' },
-  { quote: 'HowAutomate built our entire ETL pipeline from scratch — clean, reliable, fully automated. Their team truly understands data operations at scale.', name: 'GredFlow Engineering', role: 'Engineering Team · GredFlow' },
-]
-
-const clients = [
-  { src: '/assets/client-ecometra360.webp',   name: 'Ecometra360'    },
-  { src: '/assets/client-sukhija-sales.webp', name: 'Sukhija Sales'  },
-  { src: '/assets/client-shree-shyam.webp',   name: 'Shree Shyam'   },
-  { src: '/assets/client-gredflow.webp',       name: 'GredFlow'       },
-  { src: '/assets/client-apna-dental.webp',    name: 'Apna Dental'    },
-  { src: '/assets/client-utsavify.webp',       name: 'Utsavify'       },
-]
-
-const tools = [
-  { icon: FileText, title: 'File to PDF',         desc: 'Convert docs, images & spreadsheets instantly.',  color: '#818cf8' },
-  { icon: Sparkle,  title: 'UGC Content Creator', desc: 'Generate social media & ad content in seconds.',  color: '#34d399' },
-  { icon: Heart,    title: 'BMI Calculator',       desc: 'Instant health insights from height & weight.',   color: '#f472b6' },
-  { icon: Clock,    title: 'DateTime ↔ Epoch',    desc: 'Convert between human dates and timestamps.',     color: '#fb923c' },
+  { icon: BarChart3, title: 'Data & Reporting', desc: 'Stop pulling reports by hand. We build pipelines that collect, clean and visualise your data automatically.', tags: ['ETL pipelines', 'Power BI', 'Sheets automation'], link: '/services#data' },
+  { icon: Bot, title: 'AI Agents', desc: 'AI receptionists, lead-qualifiers and support agents that work 24/7 and plug straight into your stack.', tags: ['GPT agents', 'CRM-wired', 'Voice & chat'], link: '/services#ai' },
+  { icon: Workflow, title: 'Workflow Automation', desc: 'n8n and Make builds that connect every tool you use — so leads, invoices and follow-ups run themselves.', tags: ['n8n', 'Make.com', 'API integration'], link: '/services#automation' },
+  { icon: Cloud, title: 'Cloud & Apps', desc: 'Azure/AWS infrastructure, database design, web crawlers and full-stack apps built to scale with you.', tags: ['Azure / AWS', 'Databases', 'Full-stack'], link: '/services#cloud' },
 ]
 
 const steps = [
-  { icon: Phone,  step: '01', title: 'Discovery Call',   desc: 'Free 30-min call to learn your workflows and goals.'  },
-  { icon: Search, step: '02', title: 'Workflow Audit',   desc: 'We map your processes and find highest-impact wins.'   },
-  { icon: Rocket, step: '03', title: 'Build & Deploy',   desc: 'Custom automations, pipelines and AI go live.'         },
-  { icon: Zap,    step: '04', title: 'Scale & Save',     desc: 'Your team focuses on strategy — automation runs 24/7.' },
+  { icon: Phone, num: '01', title: 'Discovery Call', desc: 'A free 30-min call to learn your workflows and goals.' },
+  { icon: Search, num: '02', title: 'Workflow Audit', desc: 'We map your processes and find the highest-impact wins.' },
+  { icon: Rocket, num: '03', title: 'Build & Deploy', desc: 'Custom automations, pipelines and AI go live — fast.' },
+  { icon: Zap, num: '04', title: 'Scale & Save', desc: 'Your team focuses on strategy — automation runs 24/7.' },
 ]
 
-const orbDefs = [
-  { x: '12%',  y: '18%', size: 420, color: 'rgba(124,58,237,0.18)',  depth: 0.10 },
-  { x: '72%',  y: '12%', size: 300, color: 'rgba(37,99,235,0.14)',   depth: 0.16 },
-  { x: '58%',  y: '62%', size: 340, color: 'rgba(124,58,237,0.12)',  depth: 0.12 },
-  { x: '8%',   y: '68%', size: 260, color: 'rgba(96,165,250,0.10)',  depth: 0.20 },
-  { x: '82%',  y: '52%', size: 220, color: 'rgba(167,139,250,0.10)', depth: 0.14 },
+const outcomes = [
+  { metric: '90%', label: 'Report time saved', desc: 'Replaced a 3-hour manual reporting routine with a fully automated Monday-morning pipeline.', tag: 'Financial Services' },
+  { metric: '3.2×', label: 'Sales via Amazon PPC', desc: 'ACoS cut 42% → 18% and sales tripled in four months through structured Sponsored Products.', tag: 'D2C E-Commerce' },
+  { metric: '200+', label: 'Calls handled daily by AI', desc: 'An AI receptionist books appointments, answers FAQs and updates the CRM — zero hold time.', tag: 'Healthcare' },
 ]
 
-const iconDefs = [
-  { x: '18%', y: '28%', Icon: Database, depth: 0.14, delay: 0,   color: '#818cf8' },
-  { x: '76%', y: '22%', Icon: Cpu,      depth: 0.18, delay: 0.5, color: '#60a5fa' },
-  { x: '10%', y: '58%', Icon: Zap,      depth: 0.12, delay: 1,   color: '#fb923c' },
-  { x: '80%', y: '65%', Icon: Bot,      depth: 0.16, delay: 1.5, color: '#34d399' },
-  { x: '50%', y: '78%', Icon: Cloud,    depth: 0.10, delay: 0.8, color: '#f472b6' },
-  { x: '38%', y: '12%', Icon: BarChart3,depth: 0.22, delay: 0.3, color: '#a78bfa' },
+const industries = [
+  { icon: HeartPulse, name: 'Clinics & Healthcare', sub: 'Bookings, reminders, AI reception' },
+  { icon: Calculator, name: 'CA & Accounting', sub: 'GST, invoicing, report automation' },
+  { icon: Building2, name: 'Real Estate', sub: 'Lead capture & follow-up flows' },
+  { icon: ShoppingCart, name: 'E-commerce / D2C', sub: 'Amazon PPC, catalog, order ops' },
+  { icon: GraduationCap, name: 'Coaching & EdTech', sub: 'Enrolment & nurture automation' },
+  { icon: Truck, name: 'Logistics & Ops', sub: 'Tracking, alerts, data sync' },
 ]
 
-/* ─── helpers ────────────────────────────────────────────── */
+const clients = [
+  { src: '/assets/client-ecometra360.webp', name: 'Ecometra360' },
+  { src: '/assets/client-sukhija-sales.webp', name: 'Sukhija Sales' },
+  { src: '/assets/client-shree-shyam.webp', name: 'Shree Shyam' },
+  { src: '/assets/client-gredflow.webp', name: 'GredFlow' },
+  { src: '/assets/client-apna-dental.webp', name: 'Apna Dental' },
+  { src: '/assets/client-utsavify.webp', name: 'Utsavify' },
+]
 
-function glowHandler(e: React.MouseEvent) {
-  const el = e.currentTarget as HTMLElement
-  const x = e.clientX, y = e.clientY
-  requestAnimationFrame(() => {
-    const rect = el.getBoundingClientRect()
-    el.style.setProperty('--x', `${x - rect.left}px`)
-    el.style.setProperty('--y', `${y - rect.top}px`)
-  })
-}
+const tools = [
+  { icon: FileText, title: 'File to PDF', desc: 'Convert docs, images & spreadsheets instantly.' },
+  { icon: Sparkles, title: 'UGC Creator', desc: 'Generate social & ad content in seconds.' },
+  { icon: HeartPulse, title: 'BMI Calculator', desc: 'Instant health insight from height & weight.' },
+  { icon: Clock, title: 'DateTime ↔ Epoch', desc: 'Convert human dates and timestamps.' },
+]
 
-const CARD: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  borderRadius: 16,
-}
-
-const fade = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay: i * 0.1 } }),
-}
-
-/* ─── parallax orb ───────────────────────────────────────── */
-
-function ParallaxOrb({ orb, smoothX, smoothY }: { orb: typeof orbDefs[number]; smoothX: MotionValue<number>; smoothY: MotionValue<number> }) {
-  const ox = useTransform(smoothX, v => v * orb.depth)
-  const oy = useTransform(smoothY, v => v * orb.depth)
-  return (
-    <motion.div style={{ position: 'absolute', left: orb.x, top: orb.y, width: orb.size, height: orb.size, borderRadius: '50%', background: orb.color, filter: 'blur(70px)', translateX: ox, translateY: oy, pointerEvents: 'none' }} />
-  )
-}
-
-/* ─── floating icon ──────────────────────────────────────── */
-
-function FloatingIcon({ item, index, smoothX, smoothY }: { item: typeof iconDefs[number]; index: number; smoothX: MotionValue<number>; smoothY: MotionValue<number> }) {
-  const ix = useTransform(smoothX, v => v * item.depth)
-  const iy = useTransform(smoothY, v => v * item.depth)
-  return (
-    <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: item.delay + 0.6, duration: 0.5 }} style={{ position: 'absolute', left: item.x, top: item.y, translateX: ix, translateY: iy, pointerEvents: 'none' }}>
-      <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4 + index * 0.5, repeat: Infinity, ease: 'easeInOut', delay: item.delay }}
-        style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)' }}
-      >
-        <item.Icon size={20} style={{ color: item.color, opacity: 0.85 }} />
-      </motion.div>
-    </motion.div>
-  )
-}
-
-/* ─── hero ───────────────────────────────────────────────── */
-
-function HeroSection() {
-  const rawX = useMotionValue(0)
-  const rawY = useMotionValue(0)
-  const smoothX = useSpring(rawX, { stiffness: 55, damping: 20 })
-  const smoothY = useSpring(rawY, { stiffness: 55, damping: 20 })
-
-  useEffect(() => {
-    let rafId: number
-    const onMove = (e: MouseEvent) => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(() => {
-        rawX.set(e.clientX - window.innerWidth / 2)
-        rawY.set(e.clientY - window.innerHeight / 2)
-      })
-    }
-    window.addEventListener('mousemove', onMove)
-    return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(rafId) }
-  }, [rawX, rawY])
-
-  return (
-    <section className="items-start md:items-center md:min-h-screen" style={{ background: BG, ...GRID, position: 'relative', display: 'flex', overflow: 'hidden', paddingTop: 100, paddingBottom: 72 }}>
-
-      {orbDefs.map((orb, i) => <ParallaxOrb key={i} orb={orb} smoothX={smoothX} smoothY={smoothY} />)}
-
-      <div className="hidden md:block">
-        {iconDefs.map((item, i) => <FloatingIcon key={i} item={item} index={i} smoothX={smoothX} smoothY={smoothY} />)}
-      </div>
-
-      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
-
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '0 32px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <span style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.35)', color: '#c4b5fd', borderRadius: 999, padding: '6px 18px', fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 28 }}>
-            ✦ AI-First Automation Agency
-          </span>
-        </motion.div>
-
-        <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ fontSize: 'clamp(2.4rem,5.5vw,4rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.035em', margin: '0 0 20px' }}
-        >
-          Business Automation Agency —{' '}
-          <span style={{ background: 'linear-gradient(135deg,#a78bfa 0%,#60a5fa 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-            Workflows, AI & Data for Indian SMBs
-          </span>
-        </motion.h1>
-
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
-          style={{ fontSize: 17, color: 'rgba(255,255,255,0.46)', lineHeight: 1.75, margin: '0 0 36px' }}
-        >
-          End-to-end data pipelines, AI automation, and cloud engineering —<br className="hidden sm:block" />
-          so your business runs smarter, faster, and at scale.
-        </motion.p>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
-          style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          <a href="https://calendly.com/hello-howautomate/30min" target="_blank" rel="noopener noreferrer"
-            style={{ background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', padding: '13px 28px', borderRadius: 12, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: '0 8px 32px rgba(124,58,237,0.4)', transition: 'opacity 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-          >
-            Book a Free Call <ArrowRight size={16} />
-          </a>
-          <Link href="/portfolio"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', padding: '13px 28px', borderRadius: 12, fontWeight: 600, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'background 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
-          >
-            View Our Work
-          </Link>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}
-          style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap', marginTop: 28 }}
-        >
-          {['Marketers', 'Analysts', 'Founders', 'Developers'].map(a => (
-            <span key={a} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.38)', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 500 }}>
-              ✔ {a}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* scroll hint — desktop only */}
-      <motion.div className="hidden md:block" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} style={{ position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)' }}>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ width: 22, height: 36, borderRadius: 11, border: '2px solid rgba(167,139,250,0.3)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 6 }}
-        >
-          <div style={{ width: 4, height: 8, borderRadius: 2, background: 'rgba(167,139,250,0.5)' }} />
-        </motion.div>
-      </motion.div>
-    </section>
-  )
-}
-
-/* ─── stats ──────────────────────────────────────────────── */
-
-function StatsSection() {
-  return (
-    <section style={{ background: 'rgba(255,255,255,0.018)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '44px 32px' }}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s, i) => (
-            <motion.div key={s.label} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade} className="text-center">
-              <div style={{ fontSize: 'clamp(2rem,4vw,2.8rem)', fontWeight: 900, background: 'linear-gradient(135deg,#a78bfa,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', lineHeight: 1.1, marginBottom: 6 }}>{s.value}</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', fontWeight: 500 }}>{s.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── services ───────────────────────────────────────────── */
-
-function ServicesSection() {
-  return (
-    <section style={{ background: BG, ...GRID, padding: '80px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
-          <span style={{ color: '#a78bfa', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>What We Do</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 14px', letterSpacing: '-0.025em' }}>Four Pillars of Excellence</h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>Data strategy to AI deployment — we cover the full spectrum.</p>
-        </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {services.map((svc, i) => (
-            <motion.div key={svc.title} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              whileHover={{ y: -6, borderColor: 'rgba(255,255,255,0.14)' } as any}
-              style={{ ...CARD, padding: 28, display: 'flex', flexDirection: 'column', gap: 14, transition: 'all 0.25s', cursor: 'default' }}
-            >
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: svc.glow, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svc.icon size={22} style={{ color: svc.color }} />
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>{svc.title}</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.65, flexGrow: 1 }}>{svc.desc}</div>
-              <Link href={svc.link} style={{ color: svc.color, fontSize: 13, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}
-                onMouseEnter={e => (e.currentTarget.style.gap = '8px')}
-                onMouseLeave={e => (e.currentTarget.style.gap = '5px')}
-              >
-                Learn more <ArrowRight size={13} />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── outcomes ───────────────────────────────────────────── */
-
-function OutcomesSection() {
-  return (
-    <section style={{ background: 'rgba(255,255,255,0.015)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '80px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
-          <span style={{ color: '#60a5fa', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Proven Results</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '-0.025em' }}>Client Outcomes</h2>
-        </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {outcomes.map((o, i) => (
-            <motion.div key={o.label} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              whileHover={{ y: -4, borderColor: 'rgba(255,255,255,0.14)' } as any}
-              style={{ ...CARD, padding: 32, textAlign: 'center' }}
-            >
-              <div style={{ fontSize: 'clamp(2.5rem,5vw,3.2rem)', fontWeight: 900, background: 'linear-gradient(135deg,#a78bfa,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: 8 }}>{o.metric}</div>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 12 }}>{o.label}</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.65, marginBottom: 16 }}>{o.desc}</div>
-              <span style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.38)', padding: '3px 12px', borderRadius: 999, fontSize: 11, fontWeight: 600 }}>{o.tag}</span>
-            </motion.div>
-          ))}
-        </div>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginTop: 36 }}>
-          <Link href="/portfolio"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', padding: '11px 24px', borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'background 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
-          >
-            View All Case Studies <ArrowRight size={15} />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── social proof ───────────────────────────────────────── */
-
-function SocialProofSection() {
-  return (
-    <section style={{ background: BG, ...GRID, padding: '80px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
-          <span style={{ color: '#f472b6', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Testimonials</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '-0.025em' }}>What Clients Say</h2>
-        </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5" style={{ marginBottom: 56 }}>
-          {testimonials.map((t, i) => (
-            <motion.div key={t.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              whileHover={{ y: -4, borderColor: 'rgba(255,255,255,0.14)' } as any}
-              style={{ ...CARD, padding: 32 }}
-            >
-              <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={14} style={{ color: '#fbbf24', fill: '#fbbf24' }} />)}
-              </div>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.58)', lineHeight: 1.75, marginBottom: 20, fontStyle: 'italic' }}>"{t.quote}"</p>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: 13 }}>{t.name}</div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.32)', marginTop: 2 }}>{t.role}</div>
-            </motion.div>
-          ))}
-        </div>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', marginBottom: 24 }}>Trusted By</div>
-          <div className="flex flex-wrap justify-center gap-4 items-stretch">
-            {clients.map((c, i) => (
-              <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-                whileHover={{ borderColor: 'rgba(255,255,255,0.18)', background: 'rgba(255,255,255,0.09)' } as any}
-                style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 16, padding: '16px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, minWidth: 130, transition: 'all 0.2s' }}
-              >
-                <img src={c.src} alt={c.name} width={100} height={48} loading="lazy" style={{ maxHeight: 48, maxWidth: 100, width: 'auto', objectFit: 'contain', display: 'block' }} />
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{c.name}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── tools ──────────────────────────────────────────────── */
-
-function ToolsSection() {
-  return (
-    <section style={{ background: 'rgba(255,255,255,0.015)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '80px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
-          <span style={{ color: '#34d399', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Free Resources</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.025em' }}>Free Online Tools</h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.38)', margin: 0 }}>Powerful browser tools — no signup, no cost.</p>
-        </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" style={{ marginBottom: 32 }}>
-          {tools.map((t, i) => (
-            <motion.a key={t.title} href="https://tools.howautomate.com" target="_blank" rel="noopener noreferrer"
-              initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.14)' } as any}
-              style={{ ...CARD, padding: 24, textDecoration: 'none', display: 'block', transition: 'all 0.2s' }}
-            >
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: `${t.color}1a`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
-                <t.icon size={20} style={{ color: t.color }} />
-              </div>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-                {t.title} <ExternalLink size={11} style={{ color: 'rgba(255,255,255,0.22)' }} />
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.36)', lineHeight: 1.6 }}>{t.desc}</div>
-            </motion.a>
-          ))}
-        </div>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center">
-          <a href="https://tools.howautomate.com" target="_blank" rel="noopener noreferrer"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', padding: '11px 24px', borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'background 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
-          >
-            View All Tools <ExternalLink size={14} />
-          </a>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── process ────────────────────────────────────────────── */
-
-function ProcessSection() {
-  return (
-    <section style={{ background: BG, ...GRID, padding: '80px 0' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 56 }}>
-          <span style={{ color: '#fb923c', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Simple Process</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.025em' }}>How It Works</h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.38)', margin: 0 }}>From first call to full automation.</p>
-        </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((p, i) => (
-            <motion.div key={p.step} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              style={{ ...CARD, padding: 28, textAlign: 'center', transition: 'border-color 0.2s' }}
-              whileHover={{ borderColor: 'rgba(255,255,255,0.14)' } as any}
-            >
-              <div style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', position: 'relative' }}>
-                <p.icon size={24} style={{ color: 'rgba(255,255,255,0.45)' }} />
-                <span style={{ position: 'absolute', top: -8, right: -8, width: 22, height: 22, borderRadius: '50%', background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', fontSize: 9, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{p.step}</span>
-              </div>
-              <div style={{ fontWeight: 700, color: '#fff', fontSize: 15, marginBottom: 8 }}>{p.title}</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.36)', lineHeight: 1.65 }}>{p.desc}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── featured posts ─────────────────────────────────────── */
+const testimonials = [
+  { quote: 'From Power BI dashboards to end-to-end automation, HowAutomate delivered beyond expectations. They transformed how we track and act on our data.', name: 'Rahul Sharma', role: 'Marketing Lead · Ecometra360' },
+  { quote: 'They built our entire ETL pipeline from scratch — clean, reliable, fully automated. The team truly understands data operations at scale.', name: 'Priya Nair', role: 'Engineering · GredFlow' },
+]
 
 const featuredSlugs = ['n8n-vs-zapier-vs-make-2026', 'ai-receptionist-guide', 'crm-automation-small-business']
 
-function FeaturedPostsSection() {
-  const featured = featuredSlugs.map(slug => postsList.find(p => p.slug === slug)).filter(Boolean) as typeof postsList
-
-  return (
-    <section style={{ background: 'rgba(255,255,255,0.015)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '80px 0' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center" style={{ marginBottom: 48 }}>
-          <span style={{ color: '#a78bfa', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Latest Insights</span>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.025em' }}>From the Blog</h2>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', margin: 0 }}>Practical guides on automation, AI, and data engineering.</p>
-        </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginBottom: 32 }}>
-          {featured.map((post, i) => (
-            <motion.div key={post.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fade}
-              className="glow-card" onMouseMove={glowHandler}
-              whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.14)' } as any}
-              style={{ ...CARD, overflow: 'hidden', transition: 'all 0.2s' }}
-            >
-              <Link href={`/blog/${post.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
-                <div style={{ height: 160, overflow: 'hidden', position: 'relative' }}>
-                  <img src={post.image} alt={post.title} width={400} height={160} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(7,4,15,0.7), transparent)' }} />
-                  <span style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(124,58,237,0.75)', color: '#e9d5ff', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>{post.category}</span>
-                </div>
-                <div style={{ padding: 20 }}>
-                  <h3 style={{ fontWeight: 700, fontSize: 15, color: '#fff', lineHeight: 1.4, margin: '0 0 8px' }}>{post.title}</h3>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.6, margin: '0 0 14px' }}>{post.excerpt}</p>
-                  <span style={{ color: '#a78bfa', fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                    Read more <ArrowRight size={13} />
-                  </span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="text-center">
-          <Link href="/blog"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', padding: '11px 24px', borderRadius: 10, fontWeight: 600, fontSize: 14, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'background 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
-          >
-            View All Articles <ArrowRight size={15} />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── cta ────────────────────────────────────────────────── */
-
-function CTASection() {
-  return (
-    <section style={{ background: BG, padding: '80px 32px' }}>
-      <div style={{ maxWidth: 820, margin: '0 auto' }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}
-          style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.22) 0%,rgba(37,99,235,0.18) 100%)', border: '1px solid rgba(124,58,237,0.28)', borderRadius: 24, padding: '56px 40px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}
-        >
-          <div style={{ position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 400, borderRadius: '50%', background: 'radial-gradient(circle,rgba(124,58,237,0.28) 0%,transparent 65%)', pointerEvents: 'none' }} />
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'clamp(1.8rem,4vw,2.8rem)', fontWeight: 900, color: '#fff', margin: '0 0 16px', letterSpacing: '-0.025em' }}>Ready to Automate Your Business?</h2>
-            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.46)', maxWidth: 420, margin: '0 auto 36px', lineHeight: 1.75 }}>
-              A free 30-minute call could change how your business handles data forever.
-            </p>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="https://calendly.com/hello-howautomate/30min" target="_blank" rel="noopener noreferrer"
-                style={{ background: 'linear-gradient(135deg,#7c3aed,#2563eb)', color: '#fff', padding: '13px 32px', borderRadius: 12, fontWeight: 700, fontSize: 15, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: '0 8px 32px rgba(124,58,237,0.4)', transition: 'opacity 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
-                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-              >
-                Book a Free Call <ArrowRight size={16} />
-              </a>
-              <Link href="/contact"
-                style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', padding: '13px 32px', borderRadius: 12, fontWeight: 600, fontSize: 15, textDecoration: 'none', transition: 'background 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
-              >
-                Send an Inquiry
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── export ─────────────────────────────────────────────── */
+const CAL = 'https://calendly.com/hello-howautomate/30min'
 
 export default function HomeContent() {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }),
+      { threshold: 0.1 },
+    )
+    document.querySelectorAll('.ha-home .rv').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
+  const featured = featuredSlugs
+    .map((slug) => postsList.find((p) => p.slug === slug))
+    .filter(Boolean) as typeof postsList
+
   return (
-    <main style={{ background: BG }}>
-      <HeroSection />
-      <StatsSection />
-      <ServicesSection />
-      <OutcomesSection />
-      <SocialProofSection />
-      <FeaturedPostsSection />
-      <ToolsSection />
-      <ProcessSection />
-      <CTASection />
+    <main className="ha-home">
+      {/* HERO */}
+      <div className="w">
+        <div className="hero">
+          <div>
+            <div className="htag rv"><span className="pdot" /><span className="eyebrow">Automation Studio · Jaipur, India</span></div>
+            <h1 className="rv">Your business,<br />running <em>on autopilot.</em></h1>
+            <p className="hsub rv">We wire your tools together so leads, reports, invoices and follow-ups handle themselves — data pipelines, AI agents and workflow automation for Indian SMBs.</p>
+            <div className="hcta rv">
+              <a href={CAL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Book a free 30-min call <ArrowRight size={16} /></a>
+              <Link href="/portfolio" className="btn btn-ghost">See our work</Link>
+            </div>
+            <div className="htrust rv">
+              <span className="chip"><b>50+</b> automations shipped</span>
+              <span className="chip"><b>2–6 wks</b> delivery</span>
+              <span className="chip"><b>3</b> countries</span>
+            </div>
+          </div>
+          <div className="rv">
+            <svg className="stage" viewBox="0 0 480 430" role="img" aria-label="Live automation workflow: a new lead flows from Gmail to an AI agent, into a CRM sheet, then alerts the team in Slack">
+              <defs><radialGradient id="haGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" style={{ stopColor: 'rgba(var(--accent-rgb),.3)' }} /><stop offset="100%" style={{ stopColor: 'rgba(var(--accent-rgb),0)' }} /></radialGradient></defs>
+              <ellipse cx="300" cy="120" rx="140" ry="110" fill="url(#haGlow)" />
+              <path id="hc1" className="conn" d="M168,96 C220,86 250,80 300,86" />
+              <path id="hc2" className="conn" d="M404,118 C428,160 428,188 404,232" />
+              <path id="hc3" className="conn" d="M300,262 C238,286 214,300 178,330" />
+              <path id="hc4" className="conn" d="M96,322 C70,300 66,210 96,150" />
+              <circle className="dot" r="3.6"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#hc1" /></animateMotion></circle>
+              <circle className="dot" r="3.6"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#hc1" /></animateMotion></circle>
+              <circle className="dot" r="3.6"><animateMotion dur="2.6s" begin="0.4s" repeatCount="indefinite"><mpath href="#hc2" /></animateMotion></circle>
+              <circle className="dot2" r="3.6"><animateMotion dur="2.8s" begin="0.9s" repeatCount="indefinite"><mpath href="#hc3" /></animateMotion></circle>
+              <circle className="dot2" r="3.2"><animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#hc4" /></animateMotion></circle>
+              <g className="node n1 flo"><rect x="34" y="64" width="134" height="62" rx="14" /><g transform="translate(50,82)" strokeWidth="1.8" fill="none"><rect x="0" y="0" width="22" height="16" rx="3" /><path d="M0,2 L11,10 L22,2" /></g><text className="lbl" x="82" y="90">New lead</text><text className="sub" x="82" y="108">GMAIL · INBOX</text></g>
+              <g className="node n2 ai flo b"><rect x="300" y="56" width="146" height="66" rx="15" /><g transform="translate(317,76)" strokeWidth="1.8" fill="none"><rect x="2" y="3" width="20" height="18" rx="4" /><path d="M12 0v3M8 12h.5M16 12h.5" /></g><text className="lbl" x="350" y="84">AI Agent</text><text className="sub" x="350" y="102">QUALIFY · REPLY</text></g>
+              <g className="node n3 flo c"><rect x="300" y="232" width="146" height="62" rx="14" /><g transform="translate(316,250)" strokeWidth="1.8" fill="none"><rect x="0" y="0" width="22" height="18" rx="3" /><path d="M0,7 H22 M7,0 V18" /></g><text className="lbl" x="350" y="258">Logged to CRM</text><text className="sub" x="350" y="276">GOOGLE SHEET</text></g>
+              <g className="node n4 flo d"><rect x="30" y="298" width="148" height="62" rx="14" /><g transform="translate(46,316)" strokeWidth="1.8" fill="none"><path d="M4 11a3 3 0 113 3H4zM11 18a3 3 0 11-3-3v3z" /></g><text className="lbl" x="78" y="324">Team notified</text><text className="sub" x="78" y="342">SLACK · #sales</text></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* BENTO */}
+      <section><div className="w"><div className="bento">
+        <div className="tile t-dash rv">
+          <div className="dwin"><span className="tl"><i /><i /><i /></span> ops.howautomate.com</div>
+          <div style={{ marginTop: 16 }}><div className="tlabel">Weekly throughput</div></div>
+          <div className="dbar">
+            {[40, 62, 48, 78, 66, 92, 84].map((h, i) => <span key={i} style={{ height: `${h}%`, animationDelay: `${0.05 + i * 0.07}s` }} />)}
+          </div>
+          <div className="dup"><TrendingUp size={13} /> 32% more tasks cleared, zero extra headcount</div>
+        </div>
+        <div className="tile rv"><div className="tlabel">Report time</div><div className="metric">90<span className="u">%</span></div><p>saved vs. manual</p></div>
+        <div className="tile rv"><div className="tlabel">Amazon PPC</div><div className="metric">3.2<span className="u">×</span></div><p>sales in 4 months</p></div>
+        <div className="tile t-quote rv"><div className="qtx">“They changed how we track and act on our data — dashboards to end-to-end automation.”</div><div className="qby">RAHUL · MARKETING LEAD, ECOMETRA360</div></div>
+      </div></div></section>
+
+      {/* SERVICES */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">What we build</span><h2>Four services, done properly.</h2><p>No buzzwords — these are the systems we ship for clients every week, end to end.</p></div>
+        <div className="svc">
+          {services.map((s) => (
+            <div className="svcard rv" key={s.title}>
+              <div className="svicon"><s.icon size={22} /></div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <div className="svtags">{s.tags.map((t) => <span className="svtag" key={t}>{t}</span>)}</div>
+              <Link href={s.link} className="svlink">Learn more <ArrowRight size={14} /></Link>
+            </div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* PROCESS */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">How it works</span><h2>From first call to full automation.</h2></div>
+        <div className="proc">
+          {steps.map((p) => (
+            <div className="pcard rv" key={p.num}>
+              <div className="pnum">{p.num}</div>
+              <div className="picon"><p.icon size={22} /></div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* OUTCOMES */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">Proven results</span><h2>What changed for clients.</h2></div>
+        <div className="g3">
+          {outcomes.map((o) => (
+            <div className="ocard rv" key={o.label}>
+              <div className="ometric">{o.metric}</div>
+              <h3>{o.label}</h3>
+              <p>{o.desc}</p>
+              <span className="tag">{o.tag}</span>
+            </div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* INDUSTRIES */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">Who we work with</span><h2>Built for Indian SMBs.</h2></div>
+        <div className="inds rv">
+          {industries.map((it) => (
+            <div className="ind" key={it.name}><it.icon className="ico" size={22} /><b>{it.name}<span>{it.sub}</span></b></div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* TRUSTED BY */}
+      <section className="divln"><div className="w">
+        <div className="shead rv" style={{ textAlign: 'center', margin: '0 auto 30px' }}><span className="eyebrow">Trusted by</span></div>
+        <div className="logos rv">
+          {clients.map((c) => (
+            <div className="lcard" key={c.name}><img src={c.src} alt={c.name} width={118} height={46} loading="lazy" /></div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* FEATURED POSTS */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">Latest insights</span><h2>From the blog.</h2><p>Practical guides on automation, AI and data engineering.</p></div>
+        <div className="posts">
+          {featured.map((post) => (
+            <Link href={`/blog/${post.slug}`} className="post rv" key={post.slug}>
+              <div className="pimg"><img src={post.image} alt={post.title} width={400} height={170} loading="lazy" /><span className="pcat">{post.category}</span></div>
+              <div className="pbody"><h3>{post.title}</h3><p>{post.excerpt}</p></div>
+            </Link>
+          ))}
+        </div>
+      </div></section>
+
+      {/* TOOLS */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">Free resources</span><h2>Free online tools.</h2><p>Powerful browser tools — no signup, no cost.</p></div>
+        <div className="tools rv">
+          {tools.map((t) => (
+            <a className="tool" href="https://tools.howautomate.com" target="_blank" rel="noopener noreferrer" key={t.title}>
+              <div className="ti"><t.icon size={20} /></div>
+              <h3>{t.title} <ExternalLink size={11} /></h3>
+              <p>{t.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div></section>
+
+      {/* TESTIMONIALS */}
+      <section className="divln"><div className="w">
+        <div className="shead rv"><span className="eyebrow">Testimonials</span><h2>What clients say.</h2></div>
+        <div className="tst">
+          {testimonials.map((t) => (
+            <div className="tcard rv" key={t.name}>
+              <div className="stars">{[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}</div>
+              <p>“{t.quote}”</p>
+              <div className="tname">{t.name}</div>
+              <div className="trole">{t.role}</div>
+            </div>
+          ))}
+        </div>
+      </div></section>
+
+      {/* CTA */}
+      <section><div className="w"><div className="cta rv">
+        <h2>See what an afternoon of automation could save you.</h2>
+        <p>A free 30-minute call. We map one workflow live and show you the highest-impact win — no pitch.</p>
+        <div className="hcta">
+          <a href={CAL} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Book a free call <ArrowRight size={16} /></a>
+          <Link href="/contact" className="btn btn-ghost">Send an inquiry</Link>
+        </div>
+      </div></div></section>
     </main>
   )
 }

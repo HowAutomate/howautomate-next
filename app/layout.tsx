@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, IBM_Plex_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
@@ -10,6 +10,25 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
+  variable: "--font-space",
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+  variable: "--font-plexmono",
+});
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  display: "swap",
+  style: ["italic", "normal"],
+  weight: ["400", "500"],
+  variable: "--font-newsreader",
 });
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -34,7 +53,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${inter.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${newsreader.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
