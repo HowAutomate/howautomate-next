@@ -61,7 +61,7 @@ const testimonials = [
   { quote: 'They built our entire ETL pipeline from scratch — clean, reliable, fully automated. The team truly understands data operations at scale.', name: 'Priya Nair', role: 'Engineering · GredFlow' },
 ]
 
-const featuredSlugs = ['n8n-vs-zapier-vs-make-2026', 'ai-receptionist-guide', 'crm-automation-small-business']
+const featuredSlugs = ['google-merchant-center-suspension-recovery', 'performance-max-small-business-india', 'ai-social-media-automation-n8n']
 
 const CAL = 'https://calendly.com/hello-howautomate/30min'
 
@@ -99,7 +99,7 @@ export default function HomeContent() {
             </div>
           </div>
           <div className="rv">
-            <svg className="stage" viewBox="0 0 480 430" role="img" aria-label="Live automation workflow: a new lead flows from Gmail to an AI agent, into a CRM sheet, then alerts the team in Slack">
+            <svg className="stage" viewBox="0 0 480 430" role="img" aria-label="Live automation workflow: a new lead arrives in Gmail, an AI agent qualifies and replies, the lead is logged to a Google Sheet CRM, and an automatic WhatsApp reply reaches the customer in 30 seconds">
               <defs><radialGradient id="haGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" style={{ stopColor: 'rgba(var(--accent-rgb),.3)' }} /><stop offset="100%" style={{ stopColor: 'rgba(var(--accent-rgb),0)' }} /></radialGradient></defs>
               <ellipse cx="300" cy="120" rx="140" ry="110" fill="url(#haGlow)" />
               <path id="hc1" className="conn" d="M168,96 C220,86 250,80 300,86" />
@@ -114,7 +114,7 @@ export default function HomeContent() {
               <g className="node n1 flo"><rect x="34" y="64" width="134" height="62" rx="14" /><g transform="translate(50,82)" strokeWidth="1.8" fill="none"><rect x="0" y="0" width="22" height="16" rx="3" /><path d="M0,2 L11,10 L22,2" /></g><text className="lbl" x="82" y="90">New lead</text><text className="sub" x="82" y="108">GMAIL · INBOX</text></g>
               <g className="node n2 ai flo b"><rect x="300" y="56" width="146" height="66" rx="15" /><g transform="translate(317,76)" strokeWidth="1.8" fill="none"><rect x="2" y="3" width="20" height="18" rx="4" /><path d="M12 0v3M8 12h.5M16 12h.5" /></g><text className="lbl" x="350" y="84">AI Agent</text><text className="sub" x="350" y="102">QUALIFY · REPLY</text></g>
               <g className="node n3 flo c"><rect x="300" y="232" width="146" height="62" rx="14" /><g transform="translate(316,250)" strokeWidth="1.8" fill="none"><rect x="0" y="0" width="22" height="18" rx="3" /><path d="M0,7 H22 M7,0 V18" /></g><text className="lbl" x="350" y="258">Logged to CRM</text><text className="sub" x="350" y="276">GOOGLE SHEET</text></g>
-              <g className="node n4 flo d"><rect x="30" y="298" width="148" height="62" rx="14" /><g transform="translate(46,316)" strokeWidth="1.8" fill="none"><path d="M4 11a3 3 0 113 3H4zM11 18a3 3 0 11-3-3v3z" /></g><text className="lbl" x="78" y="324">Team notified</text><text className="sub" x="78" y="342">SLACK · #sales</text></g>
+              <g className="node n4 flo d"><rect x="30" y="298" width="148" height="62" rx="14" /><g transform="translate(46,316)" strokeWidth="1.8" fill="none"><path d="M3,0 h13 a3,3 0 0 1 3,3 v8 a3,3 0 0 1 -3,3 h-8 l-5,4 v-4 h0 a3,3 0 0 1 -3,-3 v-8 a3,3 0 0 1 3,-3z" /><path d="M6,4.5 c0.5,3.5 3,6 6.5,6.5" /></g><text className="lbl" x="78" y="324">Reply sent</text><text className="sub" x="78" y="342">WHATSAPP · 30 SEC</text></g>
             </svg>
           </div>
         </div>

@@ -6,10 +6,10 @@ import { casesList } from "@/lib/portfolio";
 import type { PortfolioCase } from "@/lib/portfolio";
 
 const catColor: Record<string, string> = {
-  AI:        "text-orange-400 bg-orange-950/40 border-orange-800/40",
+  AI:        "text-orange-600 bg-orange-50 border-orange-200",
   Data:      "text-primary bg-accent border-primary/20",
-  Cloud:     "text-indigo-400 bg-indigo-950/40 border-indigo-800/40",
-  Marketing: "text-emerald-400 bg-emerald-950/40 border-emerald-800/40",
+  Cloud:     "text-indigo-600 bg-indigo-50 border-indigo-200",
+  Marketing: "text-emerald-600 bg-emerald-50 border-emerald-200",
 };
 
 export default function PortfolioPostContent({ project }: { project: PortfolioCase }) {
@@ -21,10 +21,10 @@ export default function PortfolioPostContent({ project }: { project: PortfolioCa
     <main className="min-h-screen bg-background">
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ background: '#07040f' }}>
+      <section className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg,#EEF3FE 0%,#F8F8F4 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(124,58,237,0.12)' }} />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl" style={{ background: 'rgba(37,99,235,0.10)' }} />
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(37,99,235,0.10)' }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl" style={{ background: 'rgba(14,165,233,0.10)' }} />
         </div>
 
         <div className="container mx-auto px-4 pt-32 pb-16 relative z-10">
@@ -49,8 +49,8 @@ export default function PortfolioPostContent({ project }: { project: PortfolioCa
           {/* metrics strip */}
           <div className="flex flex-wrap gap-6">
             {project.outcomes.map((o) => (
-              <div key={o.label} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '16px 24px' }}>
-                <div className="text-2xl font-extrabold" style={{ background: 'linear-gradient(135deg,#a78bfa,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <div key={o.label} style={{ background: 'rgba(255,255,255,0.85)', border: '1px solid rgba(37,99,235,0.14)', borderRadius: 14, padding: '16px 24px', boxShadow: '0 2px 10px rgba(37,99,235,0.05)' }}>
+                <div className="text-2xl font-extrabold" style={{ background: 'linear-gradient(135deg,#2563eb,#0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   {o.metric}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">{o.label}</div>
@@ -107,7 +107,7 @@ export default function PortfolioPostContent({ project }: { project: PortfolioCa
           <aside className="space-y-6">
 
             {/* outcomes */}
-            <div style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.18)', borderRadius: 16, padding: 24 }}>
+            <div style={{ background: 'rgba(37,99,235,0.05)', border: '1px solid rgba(37,99,235,0.16)', borderRadius: 16, padding: 24 }}>
               <h3 className="font-bold text-foreground mb-4">Results at a Glance</h3>
               <ul className="space-y-3">
                 {project.outcomes.map((o) => (
@@ -123,7 +123,7 @@ export default function PortfolioPostContent({ project }: { project: PortfolioCa
             </div>
 
             {/* tech stack */}
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: 24 }}>
+            <div style={{ background: '#fff', border: '1px solid rgba(15,23,42,0.08)', borderRadius: 16, padding: 24 }}>
               <h3 className="font-bold text-foreground mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((t) => (
@@ -133,7 +133,7 @@ export default function PortfolioPostContent({ project }: { project: PortfolioCa
             </div>
 
             {/* CTA */}
-            <div style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.12),rgba(37,99,235,0.08))', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, padding: 24 }}>
+            <div style={{ background: 'linear-gradient(135deg,rgba(37,99,235,0.10),rgba(14,165,233,0.06))', border: '1px solid rgba(37,99,235,0.18)', borderRadius: 16, padding: 24 }}>
               <h3 className="font-bold text-foreground mb-2">Want similar results?</h3>
               <p className="text-sm text-muted-foreground mb-4">Book a free 30-minute discovery call and we'll scope your project.</p>
               <Button asChild className="w-full bg-gradient-neon text-white hover:opacity-90 rounded-xl">

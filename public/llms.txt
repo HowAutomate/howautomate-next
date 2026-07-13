@@ -22,6 +22,16 @@ License: https://creativecommons.org/licenses/by-nc/4.0/
 
 ## Blog Articles
 
+### Latest (July 2026)
+- [Google Merchant Center Suspended for Misrepresentation? The Same-Day Recovery Playbook](https://howautomate.com/blog/google-merchant-center-suspension-recovery)
+  > The exact trust-signal checklist that recovered a suspended Merchant Center in one day — policy pages, business info consistency, GST/PAN payments identity verification, feed accuracy, and the right way to request review.
+- [Performance Max on a Small Budget: The Indian D2C Playbook (₹100–₹500/Day)](https://howautomate.com/blog/performance-max-small-business-india)
+  > How small Indian D2C brands launch profitable PMax campaigns on tiny budgets — feed quality, verified conversion tracking, asset groups, GA4 audience signals, learning-phase discipline, and decoding Google's warnings.
+- [GA4 + Meta Pixel for E-Commerce: Conversion Tracking That Actually Fires](https://howautomate.com/blog/ga4-meta-pixel-conversion-tracking)
+  > Why 'installed' analytics often records nothing, the four events every store needs, SPA pitfalls, linking GA4 to Google Ads, and the one real-test-order verification that proves tracking works end-to-end.
+- [AI Social Media Autopilot: Auto-Generate & Post to LinkedIn + Instagram Daily with n8n](https://howautomate.com/blog/ai-social-media-automation-n8n)
+  > Architecture of a fully automated daily posting system — LLM caption writing with brand-voice prompts, on-brand AI image generation, LinkedIn and Instagram Graph API publishing, repetition control, and running costs.
+
 ### Latest (June 2026)
 - [AI Chatbot for Your Website: Lead Capture & 24/7 Support for Indian Businesses](https://howautomate.com/blog/ai-chatbot-website-india)
   > How LLM-powered website chatbots capture leads, qualify visitors, book appointments, and reply in Hindi or English 24/7 — costs, setup, and integrations for India.
