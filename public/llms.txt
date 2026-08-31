@@ -22,6 +22,14 @@ License: https://creativecommons.org/licenses/by-nc/4.0/
 
 ## Blog Articles
 
+### Latest (August 2026)
+- [Why Your AI Lead Scraper Keeps Messaging the Wrong People (And How to Fix It)](https://howautomate.com/blog/ai-lead-qualification-false-positives)
+  > Four distinct patterns that fool AI lead classifiers into qualifying competitors and freelancers as buyers, found and fixed in HowAutomate's own daily LinkedIn lead engine — headline-blind scoring, third-person framing, anecdote-into-pitch content marketing, and buried override rules.
+- [AI Agents vs Automation: What Indian SMBs Actually Need in 2026](https://howautomate.com/blog/ai-agents-vs-automation-india)
+  > A practical test for whether a business problem needs a predictable fixed-sequence automation or a genuine judgment-making AI agent — and why most "AI agent" pitches in 2026 are expensive automation in disguise.
+- [Festival Season Ads in India: What Creative Actually Converts (Real Campaign Data)](https://howautomate.com/blog/festival-season-ad-creative-india)
+  > Real Meta ad campaign numbers from a Rakhi-season D2C launch — a break-even blended ROAS hiding a clear creative-type split, with combo-bundle reels driving 82% of purchases while standalone premium items underperformed.
+
 ### Latest (July 2026)
 - [Google Merchant Center Suspended for Misrepresentation? The Same-Day Recovery Playbook](https://howautomate.com/blog/google-merchant-center-suspension-recovery)
   > The exact trust-signal checklist that recovered a suspended Merchant Center in one day — policy pages, business info consistency, GST/PAN payments identity verification, feed accuracy, and the right way to request review.
