@@ -80,6 +80,7 @@ export default function Footer() {
               {[
                 { label: "About Us", href: "/about" },
                 { label: "Portfolio", href: "/portfolio" },
+                { label: "Systems Catalog", href: "/automation-stack.html" },
                 { label: "Blog", href: "/blog" },
                 { label: "AI Automation in Jaipur", href: "/ai-automation-agency-jaipur" },
                 { label: "Contact", href: "/contact" },
