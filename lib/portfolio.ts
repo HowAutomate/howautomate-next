@@ -12,6 +12,53 @@ export interface PortfolioCase {
 }
 
 const cases: Record<string, PortfolioCase> = {
+  "marketplace-order-processing-automation": {
+    slug: "marketplace-order-processing-automation",
+    title: "Multi-Marketplace Order Processing on Autopilot: Unicommerce Invoices, Labels & Manifests",
+    category: "Data",
+    image: "/assets/portfolio-etl-pipeline.webp",
+    tech: ["Python", "Unicommerce API", "Google Drive API", "Google Sheets API", "SQLite", "Linux cron", "ZPL rendering"],
+    excerpt: "A fashion-accessories seller on six marketplaces was spending hours a day in the Unicommerce panel. We automated invoicing, labels, ready-to-ship, courier manifests, Drive filing, a combined picklist and the team's dispatch sheets — on a four-slot daily schedule.",
+    problem: "The brand sells on Myntra, Ajio, Nykaa, Nykaa Fashion, Flipkart and Amazon through Unicommerce. Every pickup slot, someone had to open the panel channel by channel: create invoices, download invoices, labels and order data, mark shipments ready to ship, create a manifest per courier, file everything into folders, build a picklist for the warehouse, and type each dispatched shipment into a per-channel master spreadsheet. It was hours of skilled time daily, and every manual step was a chance for a wrong label or a missed row.",
+    solution: "We built a Python service that drives the whole loop through the Unicommerce API on a schedule matched to the courier pickups — one morning slot and three day slots. Each run finds new orders per channel, invoices them, resolves each channel's quirks, fetches labels (rendering Amazon's ZPL labels to PDF locally), creates and closes manifests per courier, files every document in Google Drive by date/channel/run, rebuilds a combined SKU-sorted picklist in Google Sheets, and appends dispatched shipments to the team's existing master sheets in their exact format. A local ledger tracks every shipment's stage so nothing is ever processed twice, and an email after every run reports what happened.",
+    outcomes: [
+      { metric: "36", label: "Shipments dispatched on the first full scheduled day" },
+      { metric: "5", label: "Marketplaces live through one pipeline (Flipkart next)" },
+      { metric: "4×/day", label: "Unattended runs, matched to courier pickups" },
+      { metric: "0", label: "Customer addresses sent to third-party label renderers" },
+    ],
+    body: [
+      "We started by documenting the team's real manual process — every click, every download, every file name — and then reproduced it one real order at a time, per channel, in dry-run mode first. That's how the undocumented differences surfaced: Myntra and both Nykaa channels go straight to ready-to-ship on invoicing; Ajio leaves the shipment without a courier until a separate allocation call; Flipkart orders refuse invoicing until their processing time (8 PM) and are picked up in the next morning's slot; and Amazon returns labels as raw ZPL for thermal printers.",
+      "Dispatch is irreversible, so the system is built around a ledger. Each shipment moves through named stages — invoiced, ready-to-ship, dispatched — or parks at a named 'stuck' stage that's retried automatically next run. A dispatch is written to the ledger the instant the manifest call succeeds, before any document is downloaded, so a later network failure can never cause a shipment to be manifested twice.",
+      "Amazon's ZPL labels are rendered to PDF on our own server rather than through an online converter, so customer names and addresses never leave the system; we verified the rendered barcodes decode correctly. The team gets both the PDF and the original .zpl for their thermal printer.",
+      "The outputs fit how the team already works. Documents land in a Drive folder tree they can browse by date, channel and run time. The picklist is a Google Sheet laid out the way the warehouse reads it — per-channel blocks of SKU and quantity, sorted by SKU. And every dispatched shipment is appended to the team's existing per-channel master spreadsheets in their exact column format, de-duplicated by AWB. We validated that mapping by regenerating a full day's real rows from our exports and matching them value-for-value against the team's hand-typed entries.",
+      "It runs on a Linux server under cron, not on a laptop. On day one, one scheduled run failed before touching any order because Google revoked the Drive token it used — and the failure alert, which shared that token, failed with it. We re-ran the slot by hand within minutes, then separated the credentials: the core job's token now carries only the Drive scope, alerts go through an independent channel, and non-critical uploads can no longer crash a run. The next scheduled run completed and reported in cleanly on its own.",
+      "The team's role shifted from operating the panel to packing boxes and checking a summary email. Next on the roadmap: the first live Flipkart slot, switching on automated verification for Amazon orders that arrive unverified, and adding channels as the brand onboards them.",
+    ],
+  },
+  "free-business-tools-suite": {
+    slug: "free-business-tools-suite",
+    title: "HowAutomate Tools: 14 Free, Privacy-First Business Tools for Indian SMBs",
+    category: "Data",
+    image: "/assets/portfolio-financial-reporting.webp",
+    tech: ["React", "TypeScript", "Vite", "pdf-lib", "Vitest", "Vercel", "n8n"],
+    excerpt: "Our own public tools site — GST invoice, GST calculator, salary slip, rent receipt, PDF merge/split/compress and more — built to run entirely in the browser so financial and personal data never touches a server.",
+    problem: "Small Indian businesses and salaried employees regularly need the same handful of documents — a GST invoice, a salary slip, rent receipts for HRA, a merged or split PDF. The popular free sites either upload your files to their servers, add watermarks, gate downloads behind sign-ups, or get Indian specifics wrong (CGST/SGST vs IGST, lakh/crore amount-in-words, the landlord-PAN rule).",
+    solution: "We built tools.howautomate.com as a single-page React app where every document tool runs fully client-side: PDFs are merged, split and compressed with pdf-lib in the browser, and invoices, payslips and rent receipts are rendered as print-ready pages saved via the browser's own Save-as-PDF — so GSTINs, PANs, bank details and salaries never leave the device. The only server-backed tool, the file converter, runs through a self-hosted n8n workflow. Tool metadata lives in one file that drives the home page, footer and structured data, and every money calculation is shared code with unit tests.",
+    outcomes: [
+      { metric: "14", label: "Free tools live, no sign-up" },
+      { metric: "100%", label: "Document tools run in the browser" },
+      { metric: "28", label: "Automated unit tests on the core logic" },
+      { metric: "4", label: "Indian business & GST tools" },
+    ],
+    body: [
+      "The design principle was 'nothing to trust us with'. For a GST invoice or a salary slip, the safest server is no server: the form state lives in the page, the preview is a styled HTML document, and printing to PDF happens in the browser. We use a print-only stylesheet so the site's own chrome disappears from the output, and set the document title during printing so the saved file is named after the invoice or employee rather than the website.",
+      "Indian specifics are handled properly, not approximately. Amounts in words use the lakh/crore system with paise computed in integer arithmetic to avoid floating-point drift. The GST maths splits CGST and SGST per paisa so the halves always add up to the GST line, while IGST is rounded once. The rent receipt generator applies the ₹1 lakh landlord-PAN rule and the cash revenue-stamp convention, clamps receipt dates to each month's length, and prints two receipts per A4 page. The salary slip has a one-click EPF fill (12% of Basic, ₹15,000 wage ceiling).",
+      "Correctness is tested where it matters. The shared money, GST and date helpers and the PDF page-range parser are covered by unit tests — the parser's tests exist because a real bug once made selected pages silently vanish. Printed output is checked by rendering pages to PDF headlessly and counting pages, and PDF tools were verified by asserting on the actual output files.",
+      "SEO is built in, not bolted on: each tool has its own title, canonical URL, WebApplication and FAQ structured data, a sitemap entry and an llms.txt description, and routes are code-split so the home page loads only what it needs. We also fixed a subtle bug where a popular head-management library silently dropped titles and structured data from lazily-loaded routes, by replacing it with a small in-house component.",
+      "For HowAutomate, the tools do double duty: they're genuinely useful on their own, and they introduce Indian business owners — exactly the people who later need invoicing, payroll or order processing automated end-to-end — to the way we build.",
+    ],
+  },
   "d2c-brand-launch-google-meta-ads": {
     slug: "d2c-brand-launch-google-meta-ads",
     title: "Utsavify: D2C Store Launch with Google + Meta Ads, Tracking & Cart Recovery",

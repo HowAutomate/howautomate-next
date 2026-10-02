@@ -61,7 +61,7 @@ const testimonials = [
   { quote: 'They built our entire ETL pipeline from scratch — clean, reliable, fully automated. The team truly understands data operations at scale.', name: 'Priya Nair', role: 'Engineering · GredFlow' },
 ]
 
-const featuredSlugs = ['google-merchant-center-suspension-recovery', 'performance-max-small-business-india', 'ai-social-media-automation-n8n']
+const featuredSlugs = ['unicommerce-order-processing-automation', 'gst-calculation-inclusive-exclusive-india', 'hra-rent-receipt-guide-india']
 
 const CAL = 'https://calendly.com/hello-howautomate/30min'
 

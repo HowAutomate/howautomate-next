@@ -18,9 +18,17 @@ License: https://creativecommons.org/licenses/by-nc/4.0/
 - [E-Commerce Automation](https://howautomate.com/services/ecommerce-automation): Inventory sync, PPC optimisation, order processing for D2C brands
 
 ## Free Tools
-- [HowAutomate Tools](https://tools.howautomate.com): Free browser-based tools — File to PDF converter, UGC content creator, BMI calculator, DateTime/Epoch converter
+- [HowAutomate Tools](https://tools.howautomate.com): 14 free browser-based tools — GST Invoice Generator, GST Calculator, Salary Slip Generator, Rent Receipt (HRA) Generator, Merge/Split/Compress PDF, File to PDF, JSON to TypeScript & Zod, and more. Document tools run entirely in the browser.
 
 ## Blog Articles
+
+### Latest (October 2026)
+- [Automating Unicommerce Order Processing: Invoices, Labels & Manifests for Myntra, Ajio, Nykaa & Flipkart](https://howautomate.com/blog/unicommerce-order-processing-automation)
+  > How HowAutomate automated Unicommerce order processing for a multi-marketplace seller — scheduled invoicing, shipping labels (including Amazon ZPL rendered to PDF), courier manifests, Drive filing, a combined picklist Sheet and master-sheet updates — plus the per-channel quirks of Myntra, Ajio, Nykaa, Flipkart and Amazon.
+- [Rent Receipts for HRA: What Your Employer Actually Checks (2026 Guide + Free Generator)](https://howautomate.com/blog/hra-rent-receipt-guide-india)
+  > What a valid Indian rent receipt for an HRA claim must contain, when the landlord's PAN is mandatory (rent above ₹1,00,000 a year), when a revenue stamp is customary (cash above ₹5,000), how the HRA exemption is calculated under the old regime, and a free browser-based rent receipt generator.
+- [How to Calculate GST: Inclusive vs Exclusive, CGST/SGST vs IGST (With Examples)](https://howautomate.com/blog/gst-calculation-inclusive-exclusive-india)
+  > The correct formulas for adding GST to a price and removing GST from a GST-inclusive price, why subtracting the rate from the total is wrong, when to charge CGST + SGST versus IGST, how rounding works on invoices, and the GST rate slabs after the 22 September 2025 rationalisation — with a free GST calculator.
 
 ### Latest (August 2026)
 - [Why Your AI Lead Scraper Keeps Messaging the Wrong People (And How to Fix It)](https://howautomate.com/blog/ai-lead-qualification-false-positives)
